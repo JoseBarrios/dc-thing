@@ -41,6 +41,11 @@ class Thing {
     this.model.disambiguatingDescription = value;
   }
 
+  get _id(){ return this.model.identifier}
+  set _id(value){
+    if(!value) return;
+    this.model.identifier = value;
+  }
   get identifier(){ return this.model.identifier; }
   set identifier(value){
     if(!value) return;
