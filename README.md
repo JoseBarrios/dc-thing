@@ -1,2 +1,2 @@
 # thing
-Base semantic class
+Thing Class
