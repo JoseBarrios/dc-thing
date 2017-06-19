@@ -4,7 +4,7 @@ class Thing {
 
   constructor(model){
     model = model || {};
-    this.model = model;
+    this.model = {};
 
     this.additionalType = model.additionalType;
     this.alternateName = model.alternateName;
@@ -87,7 +87,6 @@ class Thing {
 
 
 
-
   /////////////////////
   //
   // METHODS
@@ -97,9 +96,11 @@ class Thing {
     Object.keys(this.model).forEach((key) =>
       (this.model[key] == EMPTY_STRING || this.model[key] == null)
       && delete this.model[key]);
-    console.log(this.model)
     return this.model;
   }
+
+  getModel(){ return this.serialize(); }
+
 }
 
 module.exports = Thing;

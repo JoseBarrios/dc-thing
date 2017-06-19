@@ -1,6 +1,6 @@
 {
   "name": "@josebarrios/thing",
-  "version": "0.1.4",
+  "version": "0.1.5",
   "description": "Base class that conforms to Schema.org",
   "main": "index.js",
   "scripts": {
