@@ -7,12 +7,13 @@ var model = {};
 model.name = 'Jose Barrios';
 model.identifier = '12334';
 model.additionalType = '';
-model.alternateName = '';
-model.description = "";
+model.alternateName = undefined;
+model.description = null;
 let thing = new Thing(model);
 
-describe('thing.name', function() {
-	it('should return the name of the thing', function() {
+describe('#serialize()', function() {
+	it('should return the serialized version of the model', function() {
+		assert.equal(thing.serialize().name, 'Jose Barrios');
 		assert.equal(thing.serialize().additionalType, undefined);
 	});
 });

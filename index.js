@@ -94,13 +94,11 @@ class Thing {
   //
   /////////////////////
   serialize(){
-    let string = JSON.stringify(this.model);
-    let serialized = JSON.parse(string, (key, value) => {
-      console.log(key, value)
-
-    });
-    console.log('SERIALIZED', serialized);
-    return serialized;
+    Object.keys(this.model).forEach((key) =>
+      (this.model[key] == EMPTY_STRING || this.model[key] == null)
+      && delete this.model[key]);
+    console.log(this.model)
+    return this.model;
   }
 }
 
