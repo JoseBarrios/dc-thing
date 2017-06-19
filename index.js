@@ -95,7 +95,10 @@ class Thing {
   /////////////////////
   serialize(){
     let string = JSON.stringify(this.model);
-    let serialized = JSON.parse(string);
+    let serialized = JSON.parse(string, (key, value) => {
+      console.log(key, value)
+
+    });
     console.log('SERIALIZED', serialized);
     return serialized;
   }
