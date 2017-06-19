@@ -13,7 +13,6 @@ let thing = new Thing(model);
 
 describe('thing.name', function() {
 	it('should return the name of the thing', function() {
-    console.log(thing.serialize())
-		assert.equal(thing.additionalType, undefined);
+		assert.equal(thing.serialize().additionalType, undefined);
 	});
 });
