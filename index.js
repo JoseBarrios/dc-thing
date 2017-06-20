@@ -2,6 +2,25 @@ const EMPTY_STRING = '';
 
 class Thing {
 
+  static serialize(person){
+    Object.keys(person.model).forEach((key) =>
+      (person.model[key] == undefined || person.model[key] == null)
+      && delete person.model[key]);
+    return person.model;
+  }
+
+  static getEmptyProperties(person){
+    let emptyProperties = {};
+    Object.keys(person.model).forEach(key =>{
+      let value = person.model[key];
+      if(!value || value === EMPTY_STRING){
+        emptyProperties[key] = value;
+      }
+    })
+    return emptyProperties;
+  }
+
+
   constructor(model){
     model = model || {};
     this.model = model;
