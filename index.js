@@ -6,6 +6,10 @@ class Thing {
     model = model || {};
     this.computed = {};
 
+    //Initialize
+    this.model = null;
+    this.emptyProperties = null;
+
     this.additionalType = model.additionalType;
     this.alternateName = model.alternateName;
     this.description = model.description;
@@ -17,6 +21,7 @@ class Thing {
     this.potentialAction = model.potentialAction;
     this.sameAs = model.sameAs;
     this.url = model.url;
+
   }
 
   get additionalType(){ return this.computed.additionalType; }
@@ -79,10 +84,10 @@ class Thing {
   // COMPUTED PROPERTIES
   //
   /////////////////////
-  get model(){
-    return this.computed;
-  }
+  get model(){ return this.computed; }
+  set model(value){ this._model = this.computed; }
 
+  set emptyProperties(value){ this._emptyProperties = this.computed; }
   get emptyProperties(){
     let emptyProperties = {};
     Object.keys(this.computed).forEach(key =>{
