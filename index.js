@@ -112,6 +112,8 @@ class Thing {
     this.potentialAction = model.potentialAction;
     this.sameAs = model.sameAs;
     this.url = model.url;
+
+    this.lodash = _;
   }
 
   get additionalType(){ return this.computed.additionalType; }
@@ -210,10 +212,10 @@ class Thing {
   // COMPUTED PROPERTIES
   //
   /////////////////////
+  set model(value){}
   get model(){ return this.computed; }
-  set model(value){ this._model = this.computed; }
 
-  set emptyProperties(value){ this._emptyProperties = this.computed; }
+  set emptyProperties(value){}
   get emptyProperties(){
     let emptyProperties = {};
     _.forIn(this.computed, (value, key) => {
