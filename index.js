@@ -1,6 +1,7 @@
 'use strict'
 
 const assert = require('assert');
+const colors = require('colors');
 const _ = require('lodash');
 
 class Thing {
@@ -10,7 +11,20 @@ class Thing {
   // Static Methods
   //
   /////////////////////
-  static logError(error){ console.error(error); }
+  static logError(error, type){
+    type = type || 'default';
+    type = type.toLowerCase();
+    switch(type){
+      case 'type':
+        console.error(new TypeError(error.red));
+        break;
+      case 'fatal':
+        throw new TypeError(error.red);
+        break;
+      default:
+        console.error(new Error(error.red));
+    }
+  }
   static isNumber(value){ return _.isNumber(value); }
   static isString(value){ return _.isString(value); }
   static isBoolean(value){ return _.isBoolean(value); }
@@ -121,7 +135,7 @@ class Thing {
     try {
       Thing.validateInputType('string', value, 'additionalType');
       if(Thing.isURL(value)){ this.computed.additionalType = value; }
-    } catch(error){ Thing.logError(error); }
+    } catch(error){ Thing.logError(`${this.constructor.name}: xxx must be string`); }
   }
 
   get alternateName(){ return this.computed.alternateName; }
@@ -129,7 +143,7 @@ class Thing {
     try {
       Thing.validateInputType('string', value, 'alternateName');
       this.computed.alternateName = value;
-    } catch(error){ Thing.logError(error); }
+    } catch(error){ Thing.logError(`${this.constructor.name}: xxx must be string`); }
   }
 
   get description(){ return this.computed.description; }
@@ -137,7 +151,7 @@ class Thing {
     try {
       Thing.validateInputType('string', value, 'description');
       this.computed.description = value;
-    } catch(error){ Thing.logError(error); }
+    } catch(error){ Thing.logError(`${this.constructor.name}: xxx must be string`); }
   }
 
   get disambiguatingDescription(){ return this.computed.disambiguatingDescription; }
@@ -145,7 +159,7 @@ class Thing {
     try {
       Thing.validateInputType('string', value, 'disambiguatingDescription');
       this.computed.disambiguatingDescription = value;
-    } catch(error){ Thing.logError(error); }
+    } catch(error){ Thing.logError(`${this.constructor.name}: xxx must be string`); }
   }
 
   get identifier(){ return this.computed.identifier; }
@@ -153,15 +167,13 @@ class Thing {
     try {
       Thing.validateInputType('string', value, 'identifier');
       this.computed.identifier = value;
-    } catch(error){ Thing.logError(error); }
+    } catch(error){ Thing.logError(`${this.constructor.name}: xxx must be string`); }
   }
 
   get image(){ return this.computed.image; }
   set image(value){
-    try {
-      Thing.validateInputType('string', value, 'image');
-      if(Thing.isURL(value)){ this.computed.image = value; }
-    } catch(error){ Thing.logError(error); }
+    if(Thing.isURL(value)){ this.computed.image = value; }
+    else { Thing.logError(`${this.constructor.name}: image must be url`); }
   }
 
   //TODO
@@ -226,5 +238,9 @@ class Thing {
     return emptyProperties;
   }
 }
+
+//let thing = new Thing();
+//thing.image = 1;
+
 
 module.exports = Thing;
