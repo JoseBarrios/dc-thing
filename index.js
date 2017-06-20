@@ -2,7 +2,6 @@
 
 const assert = require('assert');
 const _ = require('lodash');
-const EMPTY_STRING = '';
 
 class Thing {
 
@@ -34,35 +33,59 @@ class Thing {
     var error = new TypeError(`${propName} must be a ${type}`);
     switch(type.toLowerCase()){
       case 'number':
-        if(!Thing.isNumber(value) && !Thing.isEmpty(value)) throw error;
+        if(!Thing.isNumber(value) && !Thing.isEmpty(value)) {
+          throw error;
+          return false;
+        } else{ return true; }
         break;
+
       case 'string':
         var stringError = new TypeError(`${propName} must be a ${type}`);
-        if(!Thing.isString(value) && !Thing.isEmpty(value)) throw error;
+        if(!Thing.isString(value) && !Thing.isEmpty(value)) {
+          throw error;
+          return false;
+        } else{ return true; }
         break;
+
       case 'boolean':
         var booleanError = new TypeError(`${propName} must be a ${type}`);
-        if(!Thing.isBoolean(value) && !Thing.isEmpty(value)) throw error;
+        if(!Thing.isBoolean(value) && !Thing.isEmpty(value)) {
+          throw error;
+          return false;
+        } else{ return true; }
         break;
+
       case 'array':
         var arrayError = new TypeError(`${propName} must be a ${type}`);
-        if(!Thing.isArray(value) && !Type.isEmpty(value)) throw error;
+        if(!Thing.isArray(value) && !Type.isEmpty(value)) {
+          throw error;
+          return false;
+        } else{ return true; }
         break;
+
       case 'object':
         var objectError = new TypeError(`${propName} must be a ${type}`);
-        if(!Thing.isObject(value) && !Type.isEmpty(value)) throw error;
+        if(!Thing.isObject(value) && !Type.isEmpty(value)) {
+          throw error;
+          return false;
+        } else{ return true; }
         break;
+
       case 'null':
         var nullError = new TypeError(`${propName} must be a ${type}`);
-        if(!Thing.isNull(value) && !Type.isEmpty(value)) throw error;
+        if(!Thing.isNull(value) && !Type.isEmpty(value)) {
+          throw error;
+          return false;
+        } else{ return true; }
         break;
+
       default:
         var defaultError = new TypeError(`${propName} must be a ${type}`);
         throw defaultError;
     }
   }
 
-  static isValidInput(value){
+  static isValidJSONInput(value){
     return Thing.isNumber(value) ||
       Thing.isString(value) ||
       Thing.isBoolean(value) ||
@@ -73,12 +96,11 @@ class Thing {
 
   constructor(model){
     model = model || {};
+    //Initialize computed props
     this.computed = {};
-
-    //Initialize
     this.model = null;
     this.emptyProperties = null;
-
+    //Assign properties
     this.additionalType = model.additionalType;
     this.alternateName = model.alternateName;
     this.description = model.description;
@@ -91,7 +113,6 @@ class Thing {
     this.sameAs = model.sameAs;
     this.url = model.url;
   }
-
 
   get additionalType(){ return this.computed.additionalType; }
   set additionalType(value){
@@ -184,7 +205,6 @@ class Thing {
   }
 
 
-
   /////////////////////
   //
   // COMPUTED PROPERTIES
@@ -192,7 +212,6 @@ class Thing {
   /////////////////////
   get model(){ return this.computed; }
   set model(value){ this._model = this.computed; }
-
 
   set emptyProperties(value){ this._emptyProperties = this.computed; }
   get emptyProperties(){

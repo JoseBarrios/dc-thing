@@ -25,6 +25,9 @@ describe('Thing Class\n', function() {
         assert.equal(Thing.isNumber({}), false);
         assert.equal(Thing.isNumber(null), false);
         assert.equal(Thing.isNull(undefined), false);
+
+        //TODO: make test for this static method
+        assert.equal(Thing.validateInputType('number', 1, 'whatever'), true)
       });
     });
     describe('Thing.isString(value)', function() {
@@ -95,17 +98,17 @@ describe('Thing Class\n', function() {
         assert.equal(Thing.isNull(undefined), false);
       });
     });
-    describe('Thing.isValidInput(value)', function() {
+    describe('Thing.isValidJSONInput(value)', function() {
       it('should return true if value is JSON supported, false otherwise', function() {
-        assert.equal(Thing.isValidInput(1), true);
-        assert.equal(Thing.isValidInput('string'), true);
-        assert.equal(Thing.isValidInput(''), true);
-        assert.equal(Thing.isValidInput(true), true);
-        assert.equal(Thing.isValidInput(true), true);
-        assert.equal(Thing.isValidInput([]), true);
-        assert.equal(Thing.isValidInput({}), true);
-        assert.equal(Thing.isValidInput(null), true);
-        assert.equal(Thing.isValidInput(undefined), false);
+        assert.equal(Thing.isValidJSONInput(1), true);
+        assert.equal(Thing.isValidJSONInput('string'), true);
+        assert.equal(Thing.isValidJSONInput(''), true);
+        assert.equal(Thing.isValidJSONInput(true), true);
+        assert.equal(Thing.isValidJSONInput(true), true);
+        assert.equal(Thing.isValidJSONInput([]), true);
+        assert.equal(Thing.isValidJSONInput({}), true);
+        assert.equal(Thing.isValidJSONInput(null), true);
+        assert.equal(Thing.isValidJSONInput(undefined), false);
       });
     });
     describe('Thing.isURL(value)', function() {
