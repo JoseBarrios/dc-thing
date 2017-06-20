@@ -13,7 +13,12 @@ let thing = new Thing(model);
 
 describe('#serialize()', function() {
 	it('should return the serialized version of the model', function() {
-		assert.equal(thing.serialize().name, 'Jose Barrios');
-		assert.equal(thing.serialize().additionalType, undefined);
+    assert.equal(thing.serialize().name, 'Jose Barrios');
+	});
+});
+
+describe('#getEmptyProperties()', function() {
+	it('should return a new object with all the empty properties of this', function() {
+    assert.equal(thing.getEmptyProperties().additionalType, '');
 	});
 });

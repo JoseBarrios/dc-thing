@@ -1,10 +1,10 @@
-const EMPTY_STRING = "";
+const EMPTY_STRING = '';
 
 class Thing {
 
   constructor(model){
     model = model || {};
-    this.model = {};
+    this.model = model;
 
     this.additionalType = model.additionalType;
     this.alternateName = model.alternateName;
@@ -21,68 +21,68 @@ class Thing {
 
   get additionalType(){ return this.model.additionalType; }
   set additionalType(value){
-    if(!value || value === EMPTY_STRING){this.model.additionalType = undefined}
-    else{ this.model.additionalType = value; }
+    if(!value) return;
+    this.model.additionalType = value;
   }
 
   get alternateName(){ return this.model.alternateName; }
   set alternateName(value){
-    if(!value || value === EMPTY_STRING) { this.model.alternateName = undefined}
-    else{ this.model.alternateName = value; }
+    if(!value) return;
+    this.model.alternateName = value;
   }
 
   get description(){ return this.model.description; }
   set description(value){
-    if(!value || value === EMPTY_STRING) { this.model.description = undefined }
-    else { this.model.description = value; }
+    if(!value) return;
+    this.model.description = value;
   }
 
   get disambiguatingDescription(){ return this.model.disambiguatingDescription; }
   set disambiguatingDescription(value){
-    if(!value || value === EMPTY_STRING) { this.model.disambiguatingDescription = undefined; }
-    else { this.model.disambiguatingDescription = value; }
+    if(!value) return;
+    this.model.disambiguatingDescription = value;
   }
 
   get identifier(){ return this.model.identifier; }
   set identifier(value){
-    if(!value || value === EMPTY_STRING) { this.model.identifier = undefined; }
-    else { this.model.identifier = value; }
+    if(!value) return;
+    this.model.identifier = value;
   }
 
   get image(){ return this.model.image; }
   set image(value){
-    if(!value || value === EMPTY_STRING) { this.model.image = undefined; }
-    else{ this.model.image = value; }
+    if(!value) return;
+    this.model.image = value;
   }
 
   get mainEntityOfPage(){ return this.model.mainEntityOfPage; }
   set mainEntityOfPage(value){
-    if(!value || value === EMPTY_STRING){ this.model.mainEntityOfPage = undefined; }
-    else { this.model.mainEntityOfPage = value; }
+    if(!value) return;
+    this.model.mainEntityOfPage = value;
   }
 
   get name(){ return this.model.name; }
   set name(value){
-    if(!value || value === EMPTY_STRING) { this.model.name = undefined; }
-    else{ this.model.name = value; }
+    if(!value) return;
+    this.model.name = value;
   }
 
   get potentialAction(){ return this.model.potentialAction; }
   set potentialAction(value){
-    if(!value || value === EMPTY_STRING) { this.model.potentialAction = undefined; }
-    else { this.model.potentialAction = value; }
+    if(!value) return;
+    this.model.potentialAction = value;
   }
 
   get sameAs(){ return this.model.sameAs; }
   set sameAs(value){
-    if(!value || value === EMPTY_STRING) { this.model.sameAs = undefined; }
-    else { this.model.sameAs = value; }
+    if(!value) return;
+    this.model.sameAs = value;
   }
 
   get url(){ return this.model.url; }
   set url(value){
-    if(!value || value === EMPTY_STRING) { this.model.url = undefined; }
-    else { this.model.url = value; }
+    if(!value) return;
+    this.model.url = value;
   }
 
 
@@ -94,13 +94,21 @@ class Thing {
   /////////////////////
   serialize(){
     Object.keys(this.model).forEach((key) =>
-      (this.model[key] == EMPTY_STRING || this.model[key] == null)
+      (this.model[key] == undefined || this.model[key] == null)
       && delete this.model[key]);
     return this.model;
   }
 
-  getModel(){ return this.serialize(); }
-
+  getEmptyProperties(){
+    let emptyProperties = {};
+    Object.keys(this.model).forEach(key =>{
+      let value = this.model[key];
+      if(!value || value === EMPTY_STRING){
+        emptyProperties[key] = value;
+      }
+    })
+    return emptyProperties;
+  }
 }
 
 module.exports = Thing;
