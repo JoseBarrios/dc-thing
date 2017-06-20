@@ -2,28 +2,9 @@ const EMPTY_STRING = '';
 
 class Thing {
 
-  static serialize(person){
-    Object.keys(person.model).forEach((key) =>
-      (person.model[key] == undefined || person.model[key] == null)
-      && delete person.model[key]);
-    return person.model;
-  }
-
-  static getEmptyProperties(person){
-    let emptyProperties = {};
-    Object.keys(person.model).forEach(key =>{
-      let value = person.model[key];
-      if(!value || value === EMPTY_STRING){
-        emptyProperties[key] = value;
-      }
-    })
-    return emptyProperties;
-  }
-
-
   constructor(model){
     model = model || {};
-    this.model = model;
+    this.computed = {};
 
     this.additionalType = model.additionalType;
     this.alternateName = model.alternateName;
@@ -38,90 +19,74 @@ class Thing {
     this.url = model.url;
   }
 
-  get additionalType(){ return this.model.additionalType; }
+  get additionalType(){ return this.computed.additionalType; }
   set additionalType(value){
-    if(!value) return;
-    this.model.additionalType = value;
+    this.computed.additionalType = value;
   }
 
-  get alternateName(){ return this.model.alternateName; }
+  get alternateName(){ return this.computed.alternateName; }
   set alternateName(value){
-    if(!value) return;
-    this.model.alternateName = value;
+    this.computed.alternateName = value;
   }
 
-  get description(){ return this.model.description; }
+  get description(){ return this.computed.description; }
   set description(value){
-    if(!value) return;
-    this.model.description = value;
+    this.computed.description = value;
   }
 
-  get disambiguatingDescription(){ return this.model.disambiguatingDescription; }
+  get disambiguatingDescription(){ return this.computed.disambiguatingDescription; }
   set disambiguatingDescription(value){
-    if(!value) return;
-    this.model.disambiguatingDescription = value;
+    this.computed.disambiguatingDescription = value;
   }
 
-  get identifier(){ return this.model.identifier; }
+  get identifier(){ return this.computed.identifier; }
   set identifier(value){
-    if(!value) return;
-    this.model.identifier = value;
+    this.computed.identifier = value;
   }
 
-  get image(){ return this.model.image; }
+  get image(){ return this.computed.image; }
   set image(value){
-    if(!value) return;
-    this.model.image = value;
+    this.computed.image = value;
   }
 
-  get mainEntityOfPage(){ return this.model.mainEntityOfPage; }
+  get mainEntityOfPage(){ return this.computed.mainEntityOfPage; }
   set mainEntityOfPage(value){
-    if(!value) return;
-    this.model.mainEntityOfPage = value;
+    this.computed.mainEntityOfPage = value;
   }
 
-  get name(){ return this.model.name; }
+  get name(){ return this.computed.name; }
   set name(value){
-    if(!value) return;
-    this.model.name = value;
+    this.computed.name = value;
   }
 
-  get potentialAction(){ return this.model.potentialAction; }
+  get potentialAction(){ return this.computed.potentialAction; }
   set potentialAction(value){
-    if(!value) return;
-    this.model.potentialAction = value;
+    this.computed.potentialAction = value;
   }
 
-  get sameAs(){ return this.model.sameAs; }
+  get sameAs(){ return this.computed.sameAs; }
   set sameAs(value){
-    if(!value) return;
-    this.model.sameAs = value;
+    this.computed.sameAs = value;
   }
 
-  get url(){ return this.model.url; }
+  get url(){ return this.computed.url; }
   set url(value){
-    if(!value) return;
-    this.model.url = value;
+    this.computed.url = value;
   }
-
-
 
   /////////////////////
   //
-  // METHODS
+  // COMPUTED PROPERTIES
   //
   /////////////////////
-  serialize(){
-    Object.keys(this.model).forEach((key) =>
-      (this.model[key] == undefined || this.model[key] == null)
-      && delete this.model[key]);
-    return this.model;
+  get model(){
+    return this.computed;
   }
 
-  getEmptyProperties(){
+  get emptyProperties(){
     let emptyProperties = {};
-    Object.keys(this.model).forEach(key =>{
-      let value = this.model[key];
+    Object.keys(this.computed).forEach(key =>{
+      let value = this.computed[key];
       if(!value || value === EMPTY_STRING){
         emptyProperties[key] = value;
       }

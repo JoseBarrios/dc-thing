@@ -11,14 +11,14 @@ model.alternateName = undefined;
 model.description = null;
 let thing = new Thing(model);
 
-describe('#serialize()', function() {
+describe('thing.model', function() {
 	it('should return the serialized version of the model', function() {
-    assert.equal(Thing.serialize(thing).name, 'Jose Barrios');
+    assert.equal(thing.model.name, 'Jose Barrios');
 	});
 });
 
-describe('#getEmptyProperties()', function() {
+describe('thing.emptyProperties', function() {
 	it('should return a new object with all the empty properties of this', function() {
-    assert.equal(Thing.getEmptyProperties(thing).additionalType, '');
+    assert.equal(thing.emptyProperties.additionalType, '');
 	});
 });
