@@ -12,6 +12,60 @@ class Thing {
   // Static Methods
   //
   /////////////////////
+  static isNumber(value){ return _.isNumber(value); }
+  static isString(value){ return _.isString(value); }
+  static isBoolean(value){ return _.isBoolean(value); }
+  static isArray(value){ return _.isArray(value); }
+  static isObject(value){ return _.isPlainObject(value); }
+  static isNull(value){ return _.isNull(value); }
+  static isUndefined(value){ return _.isUndefined(value); }
+  static model(thing){ return thing.computed; }
+
+  static keys(thing){
+    let propertyNames = [];
+    _.forIn(thing.computed, (value, key) => {
+        propertyNames.push(key);
+    })
+    return propertyNames;
+  }
+
+  static values(thing){
+    let propertyValues = [];
+    _.forIn(thing.computed, value => {
+        propertyValues.push(value);
+    })
+    return propertyValues;
+  }
+
+  static unsetProperties(thing){
+    let unsetProperties = {};
+    _.forIn(thing.computed, (value, key) => {
+      if(Thing.isEmpty(value)){
+        unsetProperties[key] = value;
+      }
+    })
+    return unsetProperties;
+  }
+
+  static isValidJSONInput(value){
+    return Thing.isNumber(value)  ||
+      Thing.isString(value)       ||
+      Thing.isBoolean(value)      ||
+      Thing.isArray(value)        ||
+      Thing.isObject(value)       ||
+      Thing.isNull(value);
+  }
+
+  static isEmpty(value){
+    return Thing.isUndefined(value) || Thing.isNull(value) || value === '';
+  }
+
+  static isURL(value){
+    let isString = Thing.isString(value);
+    let URL = new RegExp(/[-a-zA-Z0-9@:%_\+.~#?&//=]{2,256}\.[a-z]{2,4}\b(\/[-a-zA-Z0-9@:%_\+.~#?&//=]*)?/gi);
+    return  isString && URL.test(value);
+  }
+
   static logError(error, type){
     type = type || 'default';
     type = type.toLowerCase();
@@ -26,39 +80,12 @@ class Thing {
         console.error(new Error(error.red));
     }
   }
-  static isNumber(value){ return _.isNumber(value); }
-  static isString(value){ return _.isString(value); }
-  static isBoolean(value){ return _.isBoolean(value); }
-  static isArray(value){ return _.isArray(value); }
-  static isObject(value){ return _.isPlainObject(value); }
-  static isNull(value){ return _.isNull(value); }
-  static isUndefined(value){ return _.isUndefined(value); }
 
-  static isEmpty(value){
-    return Thing.isUndefined(value) || Thing.isNull(value) || value === '';
-  }
-
-  static isURL(value){
-    let isString = Thing.isString(value);
-    let URL = new RegExp(/[-a-zA-Z0-9@:%_\+.~#?&//=]{2,256}\.[a-z]{2,4}\b(\/[-a-zA-Z0-9@:%_\+.~#?&//=]*)?/gi);
-    return  isString && URL.test(value);
-  }
-
-  static isValidJSONInput(value){
-    return Thing.isNumber(value)  ||
-      Thing.isString(value)       ||
-      Thing.isBoolean(value)      ||
-      Thing.isArray(value)        ||
-      Thing.isObject(value)       ||
-      Thing.isNull(value);
-  }
 
   constructor(model){
     model = model || {};
     //Initialize computed props
     this.computed = {};
-    this.model = null;
-    this.emptyProperties = null;
     //Assign properties
     this.additionalType = model.additionalType;
     this.alternateName = model.alternateName;
@@ -117,12 +144,12 @@ class Thing {
   }
 
   //TODO
-  //get mainEntityOfPage(){ return this.computed.mainEntityOfPage; }
-  //set mainEntityOfPage(value){
-    //try {
-      //this.computed.mainEntityOfPage = value;
-    //} catch(error){ Thing.logError(error); }
-  //}
+  get mainEntityOfPage(){ return this.computed.mainEntityOfPage; }
+  set mainEntityOfPage(value){
+    try {
+      this.computed.mainEntityOfPage = value;
+    } catch(error){ Thing.logError(error); }
+  }
 
   get name(){ return this.computed.name; }
   set name(value){
@@ -132,12 +159,12 @@ class Thing {
   }
 
   //TODO
-  //get potentialAction(){ return this.computed.potentialAction; }
-  //set potentialAction(value){
-    //try {
-      //this.computed.potentialAction = value;
-    //} catch(error){ Thing.logError(error); }
-  //}
+  get potentialAction(){ return this.computed.potentialAction; }
+  set potentialAction(value){
+    try {
+      this.computed.potentialAction = value;
+    } catch(error){ Thing.logError(error); }
+  }
 
   get sameAs(){ return this.computed.sameAs; }
   set sameAs(value){
@@ -159,19 +186,38 @@ class Thing {
   // COMPUTED PROPERTIES
   //
   /////////////////////
-  set model(value){}
-  get model(){ return this.computed; }
+/*  set model(value){}*/
+  //get model(){ return this.computed; }
 
-  set emptyProperties(value){}
-  get emptyProperties(){
-    let emptyProperties = {};
-    _.forIn(this.computed, (value, key) => {
-      if(Thing.isEmpty(value)){
-        emptyProperties[key] = value;
-      }
-    })
-    return emptyProperties;
-  }
+  //set keys(value){}
+  //get keys(){
+    //let propertyNames = [];
+    //_.forIn(this.computed, (value, key) => {
+        //propertyNames.push(key);
+    //})
+    //return propertyNames;
+  //}
+
+  //set values(value){}
+  //get values(){
+    //let propertyValues = [];
+    //_.forIn(this.computed, value => {
+        //propertyValues.push(value);
+    //})
+    //return propertyValues;
+  //}
+
+  //set unsetProperties(value){}
+  //get unsetProperties(){
+    //let unsetProperties = {};
+    //_.forIn(this.computed, (value, key) => {
+      //if(Thing.isEmpty(value)){
+        //unsetProperties[key] = value;
+      //}
+    //})
+    //return unsetProperties;
+  //}
+
 }
 
 //let thing = new Thing();

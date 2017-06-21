@@ -11,6 +11,8 @@ model.alternateName = undefined;
 model.description = null;
 let thing = new Thing(model);
 
+console.log(thing.keys, thing.values)
+
 describe('Thing Class\n', function() {
 
   describe('Static Methods:', function() {
@@ -130,6 +132,33 @@ describe('Thing Class\n', function() {
         assert.equal(Thing.isURL(undefined), false);
       });
     });
+    describe('Thing.model', function() {
+      it('should return the serialized version of the class model', function() {
+        thing.description = 'description'
+        assert.equal(Thing.model(thing).description, 'description');
+      });
+    });
+    describe('Thing.unsetProperties', function() {
+      it('should return the instance empty properties', function() {
+        thing.alternateName = '';
+        thing.description = null;
+        thing.name = undefined;
+        assert.equal(Thing.isEmpty(Thing.unsetProperties(thing).alternateName), true);
+        assert.equal(Thing.isEmpty(Thing.unsetProperties(thing).description), true);
+        assert.equal(Thing.isEmpty(Thing.unsetProperties(thing).name), true);
+      });
+    });
+    describe('Thing.keys', function() {
+      it('should return the object key names in array', function() {
+        assert.equal(Thing.keys(thing).includes('description'), true);
+      });
+    });
+    describe('Thing.values', function() {
+      it('should return the object values in array', function() {
+        thing.description = 'test';
+        assert.equal(Thing.values(thing).includes('test'), true);
+      });
+    });
   });
 
 
@@ -213,20 +242,6 @@ describe('Thing Class\n', function() {
         assert.equal(thing.url, url);
       });
     });
-    describe('thing.model', function() {
-      it('should return the serialized version of the class (aka model)', function() {
-        assert.equal(thing.model.description, 'description');
-      });
-    });
-    describe('thing.emptyProperties', function() {
-      it('should return the instance empty properties', function() {
-        thing.alternateName = '';
-        thing.description = null;
-        thing.name = undefined;
-        assert.equal(thing.emptyProperties.alternateName, '');
-        assert.equal(thing.emptyProperties.description, null);
-        assert.equal(thing.emptyProperties.name, undefined);
-      });
-    });
+
   });
 });
