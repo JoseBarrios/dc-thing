@@ -3,6 +3,7 @@
 const assert = require('assert');
 const colors = require('colors');
 const _ = require('lodash');
+const EMPTY = '';
 
 class Thing {
 
@@ -19,7 +20,7 @@ class Thing {
         console.error(new TypeError(error.red));
         break;
       case 'fatal':
-        throw new TypeError(error.red);
+        throw new TypeError(error.red.inverse);
         break;
       default:
         console.error(new Error(error.red));
@@ -43,68 +44,12 @@ class Thing {
     return  isString && URL.test(value);
   }
 
-  static validateInputType(type, value, propName){
-    var error = new TypeError(`${propName} must be a ${type}`);
-    switch(type.toLowerCase()){
-      case 'number':
-        if(!Thing.isNumber(value) && !Thing.isEmpty(value)) {
-          throw error;
-          return false;
-        } else{ return true; }
-        break;
-
-      case 'string':
-        var stringError = new TypeError(`${propName} must be a ${type}`);
-        if(!Thing.isString(value) && !Thing.isEmpty(value)) {
-          throw error;
-          return false;
-        } else{ return true; }
-        break;
-
-      case 'boolean':
-        var booleanError = new TypeError(`${propName} must be a ${type}`);
-        if(!Thing.isBoolean(value) && !Thing.isEmpty(value)) {
-          throw error;
-          return false;
-        } else{ return true; }
-        break;
-
-      case 'array':
-        var arrayError = new TypeError(`${propName} must be a ${type}`);
-        if(!Thing.isArray(value) && !Type.isEmpty(value)) {
-          throw error;
-          return false;
-        } else{ return true; }
-        break;
-
-      case 'object':
-        var objectError = new TypeError(`${propName} must be a ${type}`);
-        if(!Thing.isObject(value) && !Type.isEmpty(value)) {
-          throw error;
-          return false;
-        } else{ return true; }
-        break;
-
-      case 'null':
-        var nullError = new TypeError(`${propName} must be a ${type}`);
-        if(!Thing.isNull(value) && !Type.isEmpty(value)) {
-          throw error;
-          return false;
-        } else{ return true; }
-        break;
-
-      default:
-        var defaultError = new TypeError(`${propName} must be a ${type}`);
-        throw defaultError;
-    }
-  }
-
   static isValidJSONInput(value){
-    return Thing.isNumber(value) ||
-      Thing.isString(value) ||
-      Thing.isBoolean(value) ||
-      Thing.isArray(value) ||
-      Thing.isObject(value) ||
+    return Thing.isNumber(value)  ||
+      Thing.isString(value)       ||
+      Thing.isBoolean(value)      ||
+      Thing.isArray(value)        ||
+      Thing.isObject(value)       ||
       Thing.isNull(value);
   }
 
@@ -133,7 +78,6 @@ class Thing {
   get additionalType(){ return this.computed.additionalType; }
   set additionalType(value){
     try {
-      Thing.validateInputType('string', value, 'additionalType');
       if(Thing.isURL(value)){ this.computed.additionalType = value; }
     } catch(error){ Thing.logError(`${this.constructor.name}: xxx must be string`); }
   }
@@ -141,7 +85,6 @@ class Thing {
   get alternateName(){ return this.computed.alternateName; }
   set alternateName(value){
     try {
-      Thing.validateInputType('string', value, 'alternateName');
       this.computed.alternateName = value;
     } catch(error){ Thing.logError(`${this.constructor.name}: xxx must be string`); }
   }
@@ -149,7 +92,6 @@ class Thing {
   get description(){ return this.computed.description; }
   set description(value){
     try {
-      Thing.validateInputType('string', value, 'description');
       this.computed.description = value;
     } catch(error){ Thing.logError(`${this.constructor.name}: xxx must be string`); }
   }
@@ -157,7 +99,6 @@ class Thing {
   get disambiguatingDescription(){ return this.computed.disambiguatingDescription; }
   set disambiguatingDescription(value){
     try {
-      Thing.validateInputType('string', value, 'disambiguatingDescription');
       this.computed.disambiguatingDescription = value;
     } catch(error){ Thing.logError(`${this.constructor.name}: xxx must be string`); }
   }
@@ -165,7 +106,6 @@ class Thing {
   get identifier(){ return this.computed.identifier; }
   set identifier(value){
     try {
-      Thing.validateInputType('string', value, 'identifier');
       this.computed.identifier = value;
     } catch(error){ Thing.logError(`${this.constructor.name}: xxx must be string`); }
   }
@@ -173,14 +113,13 @@ class Thing {
   get image(){ return this.computed.image; }
   set image(value){
     if(Thing.isURL(value)){ this.computed.image = value; }
-    else { Thing.logError(`${this.constructor.name}: image must be url`); }
+    else { Thing.logError(`${this.constructor.name}: image must be url`, 'type'); }
   }
 
   //TODO
   //get mainEntityOfPage(){ return this.computed.mainEntityOfPage; }
   //set mainEntityOfPage(value){
     //try {
-      //Thing.validateInputType('string', value, 'mainEntityOfPage');
       //this.computed.mainEntityOfPage = value;
     //} catch(error){ Thing.logError(error); }
   //}
@@ -188,7 +127,6 @@ class Thing {
   get name(){ return this.computed.name; }
   set name(value){
     try {
-      Thing.validateInputType('string', value, 'name');
       this.computed.name = value;
     } catch(error){ Thing.logError(error); }
   }
@@ -197,7 +135,6 @@ class Thing {
   //get potentialAction(){ return this.computed.potentialAction; }
   //set potentialAction(value){
     //try {
-      //Thing.validateInputType('string', value, 'potentialAction');
       //this.computed.potentialAction = value;
     //} catch(error){ Thing.logError(error); }
   //}
@@ -205,7 +142,6 @@ class Thing {
   get sameAs(){ return this.computed.sameAs; }
   set sameAs(value){
     try {
-      Thing.validateInputType('string', value, 'sameAs');
       if(Thing.isURL(value)){ this.computed.sameAs = value; }
     } catch(error){ Thing.logError(error); }
   }
@@ -213,7 +149,6 @@ class Thing {
   get url(){ return this.computed.url; }
   set url(value){
     try {
-      Thing.validateInputType('string', value, 'url');
       if(Thing.isURL(value)){ this.computed.url = value; }
     } catch(error){ Thing.logError(error); }
   }
