@@ -102,6 +102,9 @@ class Thing {
     this.lodash = _;
   }
 
+  get type() { return this.constructor.name }
+  set type() {}
+
   get additionalType(){ return this.computed.additionalType; }
   set additionalType(value){
     try {
