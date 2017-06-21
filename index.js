@@ -179,49 +179,6 @@ class Thing {
       if(Thing.isURL(value)){ this.computed.url = value; }
     } catch(error){ Thing.logError(error); }
   }
-
-
-  /////////////////////
-  //
-  // COMPUTED PROPERTIES
-  //
-  /////////////////////
-/*  set model(value){}*/
-  //get model(){ return this.computed; }
-
-  //set keys(value){}
-  //get keys(){
-    //let propertyNames = [];
-    //_.forIn(this.computed, (value, key) => {
-        //propertyNames.push(key);
-    //})
-    //return propertyNames;
-  //}
-
-  //set values(value){}
-  //get values(){
-    //let propertyValues = [];
-    //_.forIn(this.computed, value => {
-        //propertyValues.push(value);
-    //})
-    //return propertyValues;
-  //}
-
-  //set unsetProperties(value){}
-  //get unsetProperties(){
-    //let unsetProperties = {};
-    //_.forIn(this.computed, (value, key) => {
-      //if(Thing.isEmpty(value)){
-        //unsetProperties[key] = value;
-      //}
-    //})
-    //return unsetProperties;
-  //}
-
 }
-
-//let thing = new Thing();
-//thing.image = 1;
-
 
 module.exports = Thing;
