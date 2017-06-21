@@ -103,7 +103,7 @@ class Thing {
   }
 
   get type() { return this.constructor.name }
-  set type() {}
+  set type(value) {}
 
   get additionalType(){ return this.computed.additionalType; }
   set additionalType(value){

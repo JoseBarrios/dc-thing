@@ -163,6 +163,13 @@ describe('Thing Class\n', function() {
 
 
   describe('Properties:', function() {
+    describe('thing.type', function() {
+      it('should return the class type', function() {
+        assert.equal(thing.type, 'Thing');
+      });
+    });
+
+
     describe('thing.additionalType', function() {
       it('should only allow value to be set if it is of type string (url)', function() {
         let url = 'google.com';
@@ -170,6 +177,7 @@ describe('Thing Class\n', function() {
         assert.equal(thing.additionalType, url);
       });
     });
+
     describe('thing.alternateName', function() {
       it('should only allow value to be set if it is of type string', function() {
         let str = 'alternateName';
