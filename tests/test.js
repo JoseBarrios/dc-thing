@@ -159,6 +159,19 @@ describe('Thing Class\n', function() {
         assert.equal(Thing.values(thing).includes('test'), true);
       });
     });
+    describe('Thing.isInstance', function() {
+      it('should return the true if param is an instance of this class', function() {
+        assert.equal(Thing.isInstance(thing), true);
+        assert.equal(Thing.isInstance({}), false);
+      });
+    });
+    describe('Thing.type', function() {
+      it('should return the type of this class', function() {
+        assert.equal(Thing.type, 'Thing');
+      });
+    });
+
+
   });
 
 
@@ -166,6 +179,7 @@ describe('Thing Class\n', function() {
     describe('thing.type', function() {
       it('should return the class type', function() {
         assert.equal(thing.type, 'Thing');
+        assert.equal(thing.type, Thing.type);
       });
     });
 

@@ -2,8 +2,9 @@
 
 const assert = require('assert');
 const colors = require('colors');
-const _ = require('lodash');
+const lodash = require('lodash');
 const EMPTY = '';
+const TYPE = 'Thing';
 
 class Thing {
 
@@ -12,18 +13,18 @@ class Thing {
   // Static Methods
   //
   /////////////////////
-  static isNumber(value){ return _.isNumber(value); }
-  static isString(value){ return _.isString(value); }
-  static isBoolean(value){ return _.isBoolean(value); }
-  static isArray(value){ return _.isArray(value); }
-  static isObject(value){ return _.isPlainObject(value); }
-  static isNull(value){ return _.isNull(value); }
-  static isUndefined(value){ return _.isUndefined(value); }
+  static isNumber(value){ return lodash.isNumber(value); }
+  static isString(value){ return lodash.isString(value); }
+  static isBoolean(value){ return lodash.isBoolean(value); }
+  static isArray(value){ return lodash.isArray(value); }
+  static isObject(value){ return lodash.isPlainObject(value); }
+  static isNull(value){ return lodash.isNull(value); }
+  static isUndefined(value){ return lodash.isUndefined(value); }
   static model(thing){ return thing.computed; }
 
   static keys(thing){
     let propertyNames = [];
-    _.forIn(thing.computed, (value, key) => {
+    lodash.forIn(thing.computed, (value, key) => {
         propertyNames.push(key);
     })
     return propertyNames;
@@ -31,7 +32,7 @@ class Thing {
 
   static values(thing){
     let propertyValues = [];
-    _.forIn(thing.computed, value => {
+    lodash.forIn(thing.computed, value => {
         propertyValues.push(value);
     })
     return propertyValues;
@@ -39,7 +40,7 @@ class Thing {
 
   static unsetProperties(thing){
     let unsetProperties = {};
-    _.forIn(thing.computed, (value, key) => {
+    lodash.forIn(thing.computed, (value, key) => {
       if(Thing.isEmpty(value)){
         unsetProperties[key] = value;
       }
@@ -81,6 +82,14 @@ class Thing {
     }
   }
 
+  static isInstance(object){ return object.type === Thing.type; }
+  static get type(){ return TYPE; }
+  static get utils(){
+    let utils = {};
+    utils.lodash = lodash;
+    return utils;
+  }
+
 
   constructor(model){
     model = model || {};
@@ -99,7 +108,7 @@ class Thing {
     this.sameAs = model.sameAs;
     this.url = model.url;
 
-    this.lodash = _;
+    this.lodash = lodash;
   }
 
   get type() { return this.constructor.name }
