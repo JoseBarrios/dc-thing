@@ -107,8 +107,6 @@ class Thing {
     this.potentialAction = model.potentialAction;
     this.sameAs = model.sameAs;
     this.url = model.url;
-
-    this.lodash = lodash;
   }
 
   get type() { return this.constructor.name }
@@ -116,80 +114,96 @@ class Thing {
 
   get additionalType(){ return this.computed.additionalType; }
   set additionalType(value){
-    try {
-      if(Thing.isURL(value)){ this.computed.additionalType = value; }
-    } catch(error){ Thing.logError(`${this.constructor.name}: xxx must be string`); }
+    if(Thing.isEmpty(value)){ this.computed.additionalType = ''}
+    else if(Thing.isString(value)){ this.computed.additionalType = value}
+    else if(Thing.isObject(value)){ this.computed.additionalType = value}
+    else if(Thing.isArray(value)){ this.computed.additionalType = value}
+    else{ Thing.logError(this.type+' additionalType must be string, object or array'); }
   }
 
   get alternateName(){ return this.computed.alternateName; }
   set alternateName(value){
-    try {
-      this.computed.alternateName = value;
-    } catch(error){ Thing.logError(`${this.constructor.name}: xxx must be string`); }
+  if(Thing.isEmpty(value)){ this.computed.alternateName = ''}
+    else if(Thing.isString(value)){ this.computed.alternateName = value}
+    else{ Thing.logError(this.type+' alternateName must be string'); }
+
   }
 
   get description(){ return this.computed.description; }
   set description(value){
-    try {
-      this.computed.description = value;
-    } catch(error){ Thing.logError(`${this.constructor.name}: xxx must be string`); }
+  if(Thing.isEmpty(value)){ this.computed.description = ''}
+    else if(Thing.isString(value)){ this.computed.description = value}
+    else{ Thing.logError(this.type+' description must be string'); }
+
   }
 
   get disambiguatingDescription(){ return this.computed.disambiguatingDescription; }
   set disambiguatingDescription(value){
-    try {
-      this.computed.disambiguatingDescription = value;
-    } catch(error){ Thing.logError(`${this.constructor.name}: xxx must be string`); }
+  if(Thing.isEmpty(value)){ this.computed.disambiguatingDescription = ''}
+    else if(Thing.isString(value)){ this.computed.disambiguatingDescription = value}
+    else{ Thing.logError(this.type+' disambiguatingDescription must be string'); }
+
   }
 
   get identifier(){ return this.computed.identifier; }
   set identifier(value){
-    try {
-      this.computed.identifier = value;
-    } catch(error){ Thing.logError(`${this.constructor.name}: xxx must be string`); }
+  if(Thing.isEmpty(value)){ this.computed.identifier = ''}
+    else if(Thing.isString(value)){ this.computed.identifier = value}
+    else if(Thing.isObject(value)){ this.computed.identifier = value}
+    else{ Thing.logError(this.type+' identifier must be string or object'); }
+
   }
 
   get image(){ return this.computed.image; }
   set image(value){
-    if(Thing.isURL(value)){ this.computed.image = value; }
-    else { Thing.logError(`${this.constructor.name}: image must be url`, 'type'); }
+  if(Thing.isEmpty(value)){ this.computed.image = ''}
+    else if(Thing.isString(value)){ this.computed.image = value}
+    else if(Thing.isObject(value)){ this.computed.image = value}
+    else{ Thing.logError(this.type+' image must be string, or object'); }
+
   }
 
   //TODO
   get mainEntityOfPage(){ return this.computed.mainEntityOfPage; }
   set mainEntityOfPage(value){
-    try {
-      this.computed.mainEntityOfPage = value;
-    } catch(error){ Thing.logError(error); }
+  if(Thing.isEmpty(value)){ this.computed.mainEntityOfPage = ''}
+    else if(Thing.isString(value)){ this.computed.mainEntityOfPage = value}
+    else if(Thing.isObject(value)){ this.computed.mainEntityOfPage = value}
+    else{ Thing.logError(this.type+' mainEntityOfPage must be string, or object'); }
+
   }
 
   get name(){ return this.computed.name; }
   set name(value){
-    try {
-      this.computed.name = value;
-    } catch(error){ Thing.logError(error); }
+  if(Thing.isEmpty(value)){ this.computed.name = ''}
+    else if(Thing.isString(value)){ this.computed.name = value}
+    else{ Thing.logError(this.type+' name must be string'); }
   }
 
   //TODO
   get potentialAction(){ return this.computed.potentialAction; }
   set potentialAction(value){
-    try {
-      this.computed.potentialAction = value;
-    } catch(error){ Thing.logError(error); }
+  if(Thing.isEmpty(value)){ this.computed.potentialAction = ''}
+    else if(Thing.isString(value)){ this.computed.potentialAction = value}
+    else if(Thing.isObject(value)){ this.computed.potentialAction = value}
+    else{ Thing.logError(this.type+' potentialAction must be string or object'); }
+
   }
 
   get sameAs(){ return this.computed.sameAs; }
   set sameAs(value){
-    try {
-      if(Thing.isURL(value)){ this.computed.sameAs = value; }
-    } catch(error){ Thing.logError(error); }
+  if(Thing.isEmpty(value)){ this.computed.sameAs = ''}
+    else if(Thing.isString(value)){ this.computed.sameAs = value}
+    else if(Thing.isURL(value)){ this.computed.sameAs = value}
+    else{ Thing.logError(this.type+' sameAs must be string'); }
+
   }
 
   get url(){ return this.computed.url; }
   set url(value){
     if(Thing.isEmpty(value)){ this.computed.url = ''}
     else if(Thing.isURL(value)){ this.computed.url = value}
-    else{ Thing.logError(this.type+' url must be string in URL format'); }
+    else{ Thing.logError(this.type+' url must be string'); }
   }
 }
 
