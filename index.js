@@ -187,9 +187,9 @@ class Thing {
 
   get url(){ return this.computed.url; }
   set url(value){
-    try {
-      if(Thing.isURL(value)){ this.computed.url = value; }
-    } catch(error){ Thing.logError(error); }
+    if(Thing.isEmpty(value)){ this.computed.url = ''}
+    else if(Thing.isURL(value)){ this.computed.url = value}
+    else{ Thing.logError(this.type+' url must be string in URL format'); }
   }
 }
 
