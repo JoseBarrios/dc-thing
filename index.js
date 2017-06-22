@@ -17,7 +17,8 @@ class Thing {
   static isString(value){ return lodash.isString(value); }
   static isBoolean(value){ return lodash.isBoolean(value); }
   static isArray(value){ return lodash.isArray(value); }
-  static isObject(value){ return lodash.isPlainObject(value); }
+  static isObject(value){ return lodash.isObject(value); }
+  static isPlainObject(value){ return lodash.isPlainObject(value); }
   static isNull(value){ return lodash.isNull(value); }
   static isUndefined(value){ return lodash.isUndefined(value); }
   static model(thing){ return thing.computed; }
