@@ -85,9 +85,7 @@ class Thing {
   static isInstance(object){ return object.type === Thing.type; }
   static get type(){ return TYPE; }
   static get utils(){
-    let utils = {};
-    utils.lodash = lodash;
-    return utils;
+    return lodash;
   }
 
 
