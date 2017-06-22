@@ -78,7 +78,7 @@ describe('Thing Class\n', function() {
         assert.equal(Thing.isObject(''), false);
         assert.equal(Thing.isObject(true), false);
         assert.equal(Thing.isObject(false), false);
-        assert.equal(Thing.isObject([]), false);
+        assert.equal(Thing.isObject([1,2,3]), true);
         assert.equal(Thing.isObject({}), true);
         assert.equal(Thing.isObject({ "hello" : "world"}), true);
         assert.equal(Thing.isObject({ hello : "world"}), true);
@@ -87,6 +87,23 @@ describe('Thing Class\n', function() {
         assert.equal(Thing.isNull(undefined), false);
       });
     });
+    describe('Thing.isPlainObject(value)', function() {
+      it('should return true if value is plain object, false otherwise', function() {
+        assert.equal(Thing.isPlainObject(1), false);
+        assert.equal(Thing.isPlainObject('string'), false);
+        assert.equal(Thing.isPlainObject(''), false);
+        assert.equal(Thing.isPlainObject(true), false);
+        assert.equal(Thing.isPlainObject(false), false);
+        assert.equal(Thing.isPlainObject([]), false);
+        assert.equal(Thing.isPlainObject({}), true);
+        assert.equal(Thing.isPlainObject({ "hello" : "world"}), true);
+        assert.equal(Thing.isPlainObject({ hello : "world"}), true);
+        assert.equal(Thing.isPlainObject({ greeting : {hello: "world"}}), true);
+        assert.equal(Thing.isPlainObject(null), false);
+        assert.equal(Thing.isNull(undefined), false);
+      });
+    });
+
     describe('Thing.isNull(value)', function() {
       it('should return true if value is null, false otherwise', function() {
         assert.equal(Thing.isNull(1), false);
