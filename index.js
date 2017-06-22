@@ -5,6 +5,7 @@ const colors = require('colors');
 const lodash = require('lodash');
 const EMPTY = '';
 const TYPE = 'Thing';
+let muteErrors = false;
 
 class Thing {
 
@@ -69,6 +70,7 @@ class Thing {
   }
 
   static logError(error, type){
+    if(muteErrors && type !== 'fatal') return;
     type = type || 'default';
     type = type.toLowerCase();
     switch(type){
@@ -110,6 +112,8 @@ class Thing {
 
   get type() { return this.constructor.name }
   set type(value) {}
+
+
 
   get additionalType(){ return this.computed.additionalType; }
   set additionalType(value){
@@ -204,6 +208,20 @@ class Thing {
     else if(Thing.isURL(value)){ this.computed.url = value}
     else{ Thing.logError(this.type+' url must be string'); }
   }
+
+  ///////////////////////////////////
+  //
+  //
+  //
+  ///////////////////////////////////
+  get muteErrors() { return muteErrors };
+  set muteErrors(value) {
+    if(Thing.isBoolean(value)){
+      muteErrors = value;
+    }
+  }
+
+
 }
 
 module.exports = Thing;

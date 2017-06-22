@@ -11,8 +11,6 @@ model.alternateName = undefined;
 model.description = null;
 let thing = new Thing(model);
 
-console.log(thing.keys, thing.values)
-
 describe('Thing Class\n', function() {
 
   describe('Static Methods:', function() {
@@ -205,6 +203,10 @@ describe('Thing Class\n', function() {
         let test = 'string';
         thing.additionalType = test;
         assert.equal(thing.additionalType, test);
+        thing.muteErrors = true;
+        thing.additionalType = 1;
+        assert.equal(thing.additionalType, test);
+        thing.muteErrors = false;
       });
     });
 
@@ -281,5 +283,17 @@ describe('Thing Class\n', function() {
       });
     });
 
+  });
+
+  describe('Methods:', function() {
+     describe('#muteErrors', function() {
+       it('should stop/start error logging (except for fatal ones)', function() {
+         thing.muteErrors = true;
+         thing.name = 1;
+         assert.equal(thing.muteErrors, true);
+         thing.muteErrors = false;
+         assert.equal(thing.muteErrors, false);
+      });
+    });
   });
 });
