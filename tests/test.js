@@ -183,12 +183,11 @@ describe('Thing Class\n', function() {
       });
     });
 
-
     describe('thing.additionalType', function() {
       it('should only allow value to be set if it is of type string (url)', function() {
-        let url = 'google.com';
-        thing.additionalType = url;
-        assert.equal(thing.additionalType, url);
+        let test = 'string';
+        thing.additionalType = test;
+        assert.equal(thing.additionalType, test);
       });
     });
 
