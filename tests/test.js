@@ -185,7 +185,7 @@ describe('Thing Class\n', function() {
         test.push('description');
         test.push('identifier');
         test.push('name');
-        assert.deepStrictEqual(Thing.assignedProperties(thing), test);
+        assert.deepStrictEqual(Thing.assignedProperties(thing, 'array'), test);
       });
       it('should return the instance empty properties (object form)', function() {
         let test = {};
