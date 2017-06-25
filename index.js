@@ -71,7 +71,7 @@ class Thing {
     return unsetProperties;
   }
 
-  static assignedProperties(thing, format='array'){
+  static assignedProperties(thing, format='object'){
     format = format.toLowerCase();
     var assignedProperties = null;
 
