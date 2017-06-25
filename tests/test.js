@@ -129,7 +129,7 @@ describe('Thing Class\n', function() {
       });
     });
     describe('Thing.isURL(value)', function() {
-      it('should return true if value is a valid URL, false otherwise\n', function() {
+      it('should return true if value is a valid URL, false otherwise', function() {
         assert.equal(Thing.isURL('www.google.com'), true);
         assert.equal(Thing.isURL('google.com'), true);
         assert.equal(Thing.isURL('http://google.com'), true);
@@ -154,15 +154,33 @@ describe('Thing Class\n', function() {
       });
     });
     describe('Thing.unsetProperties', function() {
-      it('should return the instance empty properties', function() {
-        thing.alternateName = '';
-        thing.description = null;
-        thing.name = undefined;
-        assert.equal(Thing.isEmpty(Thing.unsetProperties(thing).alternateName), true);
-        assert.equal(Thing.isEmpty(Thing.unsetProperties(thing).description), true);
-        assert.equal(Thing.isEmpty(Thing.unsetProperties(thing).name), true);
+      it('should return the instance empty properties (array form)', function() {
+        let test = [];
+        test.push('additionalType');
+        test.push('alternateName');
+        test.push('disambiguatingDescription');
+        test.push('image');
+        test.push('mainEntityOfPage');
+        test.push('potentialAction');
+        test.push('sameAs');
+        test.push('url');
+        assert.deepStrictEqual(Thing.unsetProperties(thing), test);
+      });
+      it('should return the instance empty properties (object form)', function() {
+        let test = {};
+        test['additionalType'] = '';
+        test['alternateName'] = '';
+        test['disambiguatingDescription'] = '';
+        test['image'] = '';
+        test['mainEntityOfPage'] = '';
+        test['potentialAction'] = '';
+        test['sameAs'] = '';
+        test['url'] = '';
+        assert.deepStrictEqual(Thing.unsetProperties(thing, 'object'), test);
       });
     });
+
+
     describe('Thing.keys', function() {
       it('should return the object key names in array', function() {
         assert.equal(Thing.keys(thing).includes('description'), true);
@@ -181,7 +199,7 @@ describe('Thing Class\n', function() {
       });
     });
     describe('Thing.type', function() {
-      it('should return the type of this class', function() {
+      it('should return the type of this class\n', function() {
         assert.equal(Thing.type, 'Thing');
       });
     });
@@ -276,7 +294,7 @@ describe('Thing Class\n', function() {
       });
     });
     describe('thing.url', function() {
-      it('should only allow value to be set if it is of type string (url)', function() {
+      it('should only allow value to be set if it is of type string (url) \n', function() {
         let url = 'google.com';
         thing.url = url;
         assert.equal(thing.url, url);

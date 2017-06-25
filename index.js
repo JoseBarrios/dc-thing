@@ -40,13 +40,34 @@ class Thing {
     return propertyValues;
   }
 
-  static unsetProperties(thing){
-    let unsetProperties = {};
-    lodash.forIn(thing.computed, (value, key) => {
-      if(Thing.isEmpty(value)){
-        unsetProperties[key] = value;
-      }
-    })
+  static unsetProperties(thing, format='array'){
+    format = format.toLowerCase();
+    var unsetProperties = null;
+
+    switch(format){
+
+      case 'array':
+        unsetProperties = [];
+        lodash.forIn(thing.computed, (value, key) => {
+          if(Thing.isEmpty(value)){
+            unsetProperties.push(key);
+          }
+        })
+        break;
+
+      case 'object':
+        unsetProperties = {};
+        lodash.forIn(thing.computed, (value, key) => {
+          if(Thing.isEmpty(value)){
+            unsetProperties[key] = value;
+          }
+        })
+        break;
+
+      default:
+        console.log('unsetProperties format not supported')
+    }
+
     return unsetProperties;
   }
 
@@ -112,7 +133,6 @@ class Thing {
 
   get type() { return this.constructor.name }
   set type(value) {}
-
 
 
   get additionalType(){ return this.computed.additionalType; }
