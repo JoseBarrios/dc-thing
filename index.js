@@ -81,7 +81,13 @@ class Thing {
   }
 
   static isEmpty(value){
-    return Thing.isUndefined(value) || Thing.isNull(value) || value === '';
+    return Thing.isUndefined(value) ||
+      Thing.isNull(value)           ||
+      value === []                  ||
+      value === {}                  ||
+      value === '[]'                ||
+      value === '{}'                ||
+      value === '';
   }
 
   static isURL(value){
