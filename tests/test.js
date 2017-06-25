@@ -9,7 +9,7 @@ model.identifier = '12334';
 model.additionalType = '';
 model.alternateName = undefined;
 model.description = null;
-let thing = new Thing(model);
+var thing = new Thing(model);
 
 describe('Thing Class\n', function() {
 
@@ -188,8 +188,8 @@ describe('Thing Class\n', function() {
     });
     describe('Thing.values', function() {
       it('should return the object values in array', function() {
-        thing.description = 'test';
-        assert.equal(Thing.values(thing).includes('test'), true);
+        thing.description = 'description';
+        assert.equal(Thing.values(thing).includes('description'), true);
       });
     });
     describe('Thing.isInstance', function() {
@@ -209,12 +209,21 @@ describe('Thing Class\n', function() {
 
 
   describe('Properties:', function() {
+
+    describe('thing.model', function() {
+      it('should return the instance model', function() {
+        assert.equal(thing.model.description, 'description');
+      });
+    });
+
+
     describe('thing.type', function() {
       it('should return the class type', function() {
         assert.equal(thing.type, 'Thing');
         assert.equal(thing.type, Thing.type);
       });
     });
+
 
     describe('thing.additionalType', function() {
       it('should only allow value to be set if it is of type string (url)', function() {
