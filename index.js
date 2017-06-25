@@ -71,6 +71,38 @@ class Thing {
     return unsetProperties;
   }
 
+  static assignedProperties(thing, format='array'){
+    format = format.toLowerCase();
+    var assignedProperties = null;
+
+    switch(format){
+
+      case 'array':
+        assignedProperties = [];
+        lodash.forIn(thing.computed, (value, key) => {
+          if(!Thing.isEmpty(value)){
+            assignedProperties.push(key);
+          }
+        })
+        break;
+
+      case 'object':
+        assignedProperties = {};
+        lodash.forIn(thing.computed, (value, key) => {
+          if(!Thing.isEmpty(value)){
+            assignedProperties[key] = value;
+          }
+        })
+        break;
+
+      default:
+        console.log('assignedProperties format not supported')
+    }
+
+    return assignedProperties;
+  }
+
+
   static isValidJSONInput(value){
     return Thing.isNumber(value)  ||
       Thing.isString(value)       ||

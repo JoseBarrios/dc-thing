@@ -5,7 +5,7 @@ var Thing = require('../index.js');
 
 var model = {};
 model.name = 'Jose Barrios';
-model.identifier = '12334';
+model.identifier = '1234';
 model.additionalType = '';
 model.alternateName = undefined;
 model.description = null;
@@ -179,7 +179,22 @@ describe('Thing Class\n', function() {
         assert.deepStrictEqual(Thing.unsetProperties(thing, 'object'), test);
       });
     });
-
+    describe('Thing.assignedProperties', function() {
+      it('should return the instance empty properties (array form)', function() {
+        let test = [];
+        test.push('description');
+        test.push('identifier');
+        test.push('name');
+        assert.deepStrictEqual(Thing.assignedProperties(thing), test);
+      });
+      it('should return the instance empty properties (object form)', function() {
+        let test = {};
+        test['description'] = 'description';
+        test['identifier'] = '1234';
+        test['name'] = 'Jose Barrios';
+        assert.deepStrictEqual(Thing.assignedProperties(thing, 'object'), test);
+      });
+    });
 
     describe('Thing.keys', function() {
       it('should return the object key names in array', function() {
