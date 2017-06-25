@@ -24,8 +24,6 @@ class Thing {
   static isPlainObject(value){ return lodash.isPlainObject(value); }
   static isNull(value){ return lodash.isNull(value); }
   static isUndefined(value){ return lodash.isUndefined(value); }
-  static ObjectID(id){return ObjectID(id);}
-  static isObjectID(id){ return mongoose.Types.ObjectId.isValid(id); }
   static model(thing){ return thing.computed; }
 
   static keys(thing){
