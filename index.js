@@ -1,7 +1,5 @@
 'use strict'
 
-const ObjectID = require('mongodb').ObjectID;
-const mongoose = require('mongoose');
 const assert = require('assert');
 const colors = require('colors');
 const lodash = require('lodash');
@@ -174,7 +172,9 @@ class Thing {
   get type() { return this.constructor.name }
   set type(value) {}
 
-  get model(){ return this.computed; }
+  get model(){
+    return this.computed;
+  }
   set mode(value){}
 
   get additionalType(){ return this.computed.additionalType; }
