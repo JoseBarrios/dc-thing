@@ -215,7 +215,8 @@ class Thing {
   if(Thing.isEmpty(value)){ this.computed.identifier = ''}
     else if(Thing.isString(value)){ this.computed.identifier = value}
     else if(Thing.isObject(value)){ this.computed.identifier = value}
-    else{ Thing.logError(this.type+' identifier must be string or object'); }
+    else if(Thing.isNumber(value)){ this.computed.identifier = value}
+    else{ Thing.logError(this.type+' identifier must be string, number or object'); }
 
   }
 
