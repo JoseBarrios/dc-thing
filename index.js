@@ -22,7 +22,14 @@ class Thing {
   static isPlainObject(value){ return lodash.isPlainObject(value); }
   static isNull(value){ return lodash.isNull(value); }
   static isUndefined(value){ return lodash.isUndefined(value); }
-  static isEmpty(value){ return lodash.isEmpty(value); }
+  static isEmpty(value){
+    let isEmpty = false;
+    if(Thing.isArray(value) || Thing.isObject(value)){ isEmpty = lodash.isEmpty(value); }
+    if(value === ''){ isEmpty = true; }
+    if(value === undefined){ isEmpty = true; }
+    if(value === null){ isEmpty = true; }
+    return isEmpty;
+  }
   static model(thing){ return thing.computed; }
 
   static keys(thing){
@@ -90,7 +97,6 @@ class Thing {
       case 'object':
         assignedProperties = {};
         lodash.forIn(thing.computed, (value, key) => {
-          console.log(`key:${key}, value:${value} isEmpty? ${Thing.isEmpty(value)}`)
           if(!Thing.isEmpty(value)){
             assignedProperties[key] = value;
           }

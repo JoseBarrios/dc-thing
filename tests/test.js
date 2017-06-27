@@ -115,6 +115,20 @@ describe('Thing Class\n', function() {
         assert.equal(Thing.isNull(undefined), false);
       });
     });
+    describe('Thing.isEmpty(value)', function() {
+      it('should return true if value is string, false otherwise', function() {
+        assert.equal(Thing.isEmpty(1), false);
+        assert.equal(Thing.isEmpty('string'), false);
+        assert.equal(Thing.isEmpty(''), true);
+        assert.equal(Thing.isEmpty(true), false);
+        assert.equal(Thing.isEmpty(false), false);
+        assert.equal(Thing.isEmpty([]), true);
+        assert.equal(Thing.isEmpty({}), true);
+        assert.equal(Thing.isEmpty(null), true);
+        assert.equal(Thing.isEmpty(undefined), true);
+      });
+    });
+
     describe('Thing.isValidJSONInput(value)', function() {
       it('should return true if value is JSON supported, false otherwise', function() {
         assert.equal(Thing.isValidJSONInput(1), true);
@@ -246,8 +260,9 @@ describe('Thing Class\n', function() {
         thing.additionalType = test;
         assert.equal(thing.additionalType, test);
         thing.muteErrors = true;
+
         thing.additionalType = 1;
-        assert.notEqual(thing.additionalType, test);
+        assert.equal(thing.additionalType, test);
         thing.muteErrors = false;
       });
     });
