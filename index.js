@@ -90,6 +90,7 @@ class Thing {
       case 'object':
         assignedProperties = {};
         lodash.forIn(thing.computed, (value, key) => {
+          console.log(`key:${key}, value:${value} isEmpty? ${Thing.isEmpty(value)}`)
           if(!Thing.isEmpty(value)){
             assignedProperties[key] = value;
           }
