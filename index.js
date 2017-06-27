@@ -22,6 +22,7 @@ class Thing {
   static isPlainObject(value){ return lodash.isPlainObject(value); }
   static isNull(value){ return lodash.isNull(value); }
   static isUndefined(value){ return lodash.isUndefined(value); }
+  static isEmpty(value){ return lodash.isEmpty(value); }
   static model(thing){ return thing.computed; }
 
   static keys(thing){
@@ -110,16 +111,6 @@ class Thing {
       Thing.isArray(value)        ||
       Thing.isObject(value)       ||
       Thing.isNull(value);
-  }
-
-  static isEmpty(value){
-    return Thing.isUndefined(value) ||
-      Thing.isNull(value)           ||
-      value === []                  ||
-      value === {}                  ||
-      value === '[]'                ||
-      value === '{}'                ||
-      value === '';
   }
 
   static isURL(value){

@@ -247,7 +247,7 @@ describe('Thing Class\n', function() {
         assert.equal(thing.additionalType, test);
         thing.muteErrors = true;
         thing.additionalType = 1;
-        assert.equal(thing.additionalType, test);
+        assert.notEqual(thing.additionalType, test);
         thing.muteErrors = false;
       });
     });
