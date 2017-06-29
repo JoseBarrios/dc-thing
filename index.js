@@ -165,6 +165,7 @@ class Thing {
     this.potentialAction = model.potentialAction;
     this.sameAs = model.sameAs;
     this.url = model.url;
+    this.type = this.constructor.name;
   }
 
   get type() { return this.constructor.name }
@@ -281,8 +282,6 @@ class Thing {
       muteErrors = value;
     }
   }
-
-
 }
 
 module.exports = Thing;
