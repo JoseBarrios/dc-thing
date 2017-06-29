@@ -10,6 +10,7 @@ model.additionalType = '';
 model.alternateName = undefined;
 model.description = null;
 var thing = new Thing(model);
+console.log(thing)
 
 describe('Thing Class\n', function() {
 
@@ -199,6 +200,7 @@ describe('Thing Class\n', function() {
         test.push('description');
         test.push('identifier');
         test.push('name');
+        test.push('type');
         assert.deepStrictEqual(Thing.assignedProperties(thing, 'array'), test);
       });
       it('should return the instance empty properties (object form)', function() {
@@ -206,6 +208,7 @@ describe('Thing Class\n', function() {
         test['description'] = 'description';
         test['identifier'] = '1234';
         test['name'] = 'Jose Barrios';
+        test['type'] = 'Thing';
         assert.deepStrictEqual(Thing.assignedProperties(thing, 'object'), test);
       });
     });

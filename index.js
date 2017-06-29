@@ -168,8 +168,9 @@ class Thing {
     this.type = this.constructor.name;
   }
 
+  //IMMUTABLE
   get type() { return this.constructor.name }
-  set type(value) {}
+  set type(value) { this.computed.type = this.constructor.name}
 
   get model(){
     return this.computed;
