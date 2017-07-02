@@ -158,7 +158,7 @@ class Thing {
     this.alternateName = model.alternateName;
     this.description = model.description;
     this.disambiguatingDescription = model.disambiguatingDescription;
-    this.identifier = model.identifier;
+    this.identifier = model.identifier || model._id;
     this.image = model.image;
     this.mainEntityOfPage = model.mainEntityOfPage;
     this.name = model.name;
