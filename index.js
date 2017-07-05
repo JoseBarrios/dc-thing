@@ -283,6 +283,12 @@ class Thing {
       muteErrors = value;
     }
   }
+
+  isValidKey(propertyKeyName){
+    let keys = Thing.keys(new Thing());
+    return keys.includes(propertyKeyName)
+  }
+
 }
 
 module.exports = Thing;

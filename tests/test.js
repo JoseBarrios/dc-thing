@@ -346,6 +346,13 @@ describe('Thing Class\n', function() {
   });
 
   describe('Methods:', function() {
+   describe('#isValidKey', function() {
+       it('should return false if object does not accept key, true otherwise', function() {
+         assert.equal(thing.isValidKey('name'), true);
+         assert.equal(thing.isValidKey('invalid'), false);
+      });
+    });
+
      describe('#muteErrors', function() {
        it('should stop/start error logging (except for fatal ones)', function() {
          thing.muteErrors = true;
