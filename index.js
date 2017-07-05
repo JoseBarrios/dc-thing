@@ -30,7 +30,7 @@ class Thing {
     if(value === null){ isEmpty = true; }
     return isEmpty;
   }
-  static model(thing){ return Thing.assignedProperties(thing, 'object'); }
+  static model(thing){ return thing.computed; }
 
   static keys(thing){
     let propertyNames = [];
