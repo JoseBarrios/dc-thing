@@ -285,7 +285,7 @@ class Thing {
   }
 
   isValidKey(propertyKeyName){
-    let keys = Thing.keys(new Thing());
+    let keys = Thing.keys(this);
     return keys.includes(propertyKeyName)
   }
 
