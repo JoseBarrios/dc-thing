@@ -1,7 +1,5 @@
 'use strict'
 
-const assert = require('assert');
-const colors = require('colors');
 const lodash = require('lodash');
 const EMPTY = '';
 const TYPE = 'Thing';
