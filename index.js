@@ -28,11 +28,12 @@ class Thing {
     if(value === null){ isEmpty = true; }
     return isEmpty;
   }
-  static model(thing){ return thing.computed; }
+
+  static model(thing){ return thing.model; }
 
   static keys(thing){
     let propertyNames = [];
-    lodash.forIn(thing.computed, (value, key) => {
+    lodash.forIn(thing.model, (value, key) => {
         propertyNames.push(key);
     })
     return propertyNames;
@@ -40,7 +41,7 @@ class Thing {
 
   static values(thing){
     let propertyValues = [];
-    lodash.forIn(thing.computed, value => {
+    lodash.forIn(thing.model, value => {
         propertyValues.push(value);
     })
     return propertyValues;
@@ -54,7 +55,7 @@ class Thing {
 
       case 'array':
         unsetProperties = [];
-        lodash.forIn(thing.computed, (value, key) => {
+        lodash.forIn(thing.model, (value, key) => {
           if(Thing.isEmpty(value)){
             unsetProperties.push(key);
           }
@@ -63,7 +64,7 @@ class Thing {
 
       case 'object':
         unsetProperties = {};
-        lodash.forIn(thing.computed, (value, key) => {
+        lodash.forIn(thing.model, (value, key) => {
           if(Thing.isEmpty(value)){
             unsetProperties[key] = value;
           }
@@ -85,7 +86,7 @@ class Thing {
 
       case 'array':
         assignedProperties = [];
-        lodash.forIn(thing.computed, (value, key) => {
+        lodash.forIn(thing.model, (value, key) => {
           if(!Thing.isEmpty(value)){
             assignedProperties.push(key);
           }
@@ -94,7 +95,7 @@ class Thing {
 
       case 'object':
         assignedProperties = {};
-        lodash.forIn(thing.computed, (value, key) => {
+        lodash.forIn(thing.model, (value, key) => {
           if(!Thing.isEmpty(value)){
             assignedProperties[key] = value;
           }
@@ -149,8 +150,8 @@ class Thing {
 
   constructor(model){
     model = model || {};
-    //Initialize computed props
-    this.computed = {};
+    //Initialize model props
+    this.model = {};
     //Assign properties
     this.additionalType = model.additionalType;
     this.alternateName = model.alternateName;
@@ -168,105 +169,100 @@ class Thing {
 
   //IMMUTABLE
   get type() { return this.constructor.name }
-  set type(value) { this.computed.type = this.constructor.name}
+  set type(value) { this.model.type = this.constructor.name}
 
-  get model(){
-    return this.computed;
-  }
-  set mode(value){}
-
-  get additionalType(){ return this.computed.additionalType; }
+  get additionalType(){ return this.model.additionalType; }
   set additionalType(value){
-    if(Thing.isEmpty(value)){ this.computed.additionalType = ''}
-    else if(Thing.isString(value)){ this.computed.additionalType = value}
-    else if(Thing.isObject(value)){ this.computed.additionalType = value}
-    else if(Thing.isArray(value)){ this.computed.additionalType = value}
+    if(Thing.isEmpty(value)){ this.model.additionalType = ''}
+    else if(Thing.isString(value)){ this.model.additionalType = value}
+    else if(Thing.isObject(value)){ this.model.additionalType = value}
+    else if(Thing.isArray(value)){ this.model.additionalType = value}
     else{ Thing.logError(this.type+' additionalType must be string, object or array'); }
   }
 
-  get alternateName(){ return this.computed.alternateName; }
+  get alternateName(){ return this.model.alternateName; }
   set alternateName(value){
-  if(Thing.isEmpty(value)){ this.computed.alternateName = ''}
-    else if(Thing.isString(value)){ this.computed.alternateName = value}
+  if(Thing.isEmpty(value)){ this.model.alternateName = ''}
+    else if(Thing.isString(value)){ this.model.alternateName = value}
     else{ Thing.logError(this.type+' alternateName must be string'); }
 
   }
 
-  get description(){ return this.computed.description; }
+  get description(){ return this.model.description; }
   set description(value){
-  if(Thing.isEmpty(value)){ this.computed.description = ''}
-    else if(Thing.isString(value)){ this.computed.description = value}
+  if(Thing.isEmpty(value)){ this.model.description = ''}
+    else if(Thing.isString(value)){ this.model.description = value}
     else{ Thing.logError(this.type+' description must be string'); }
 
   }
 
-  get disambiguatingDescription(){ return this.computed.disambiguatingDescription; }
+  get disambiguatingDescription(){ return this.model.disambiguatingDescription; }
   set disambiguatingDescription(value){
-  if(Thing.isEmpty(value)){ this.computed.disambiguatingDescription = ''}
-    else if(Thing.isString(value)){ this.computed.disambiguatingDescription = value}
+  if(Thing.isEmpty(value)){ this.model.disambiguatingDescription = ''}
+    else if(Thing.isString(value)){ this.model.disambiguatingDescription = value}
     else{ Thing.logError(this.type+' disambiguatingDescription must be string'); }
 
   }
 
-  get identifier(){ return this.computed.identifier; }
+  get identifier(){ return this.model.identifier; }
   set identifier(value){
-  if(Thing.isEmpty(value)){ this.computed.identifier = ''}
-    else if(Thing.isString(value)){ this.computed.identifier = value}
-    else if(Thing.isObject(value)){ this.computed.identifier = value}
-    else if(Thing.isNumber(value)){ this.computed.identifier = value}
+  if(Thing.isEmpty(value)){ this.model.identifier = ''}
+    else if(Thing.isString(value)){ this.model.identifier = value}
+    else if(Thing.isObject(value)){ this.model.identifier = value}
+    else if(Thing.isNumber(value)){ this.model.identifier = value}
     else{ Thing.logError(this.type+' identifier must be string, number or object'); }
 
   }
 
-  get image(){ return this.computed.image; }
+  get image(){ return this.model.image; }
   set image(value){
-  if(Thing.isEmpty(value)){ this.computed.image = ''}
-    else if(Thing.isString(value)){ this.computed.image = value}
-    else if(Thing.isObject(value)){ this.computed.image = value}
+  if(Thing.isEmpty(value)){ this.model.image = ''}
+    else if(Thing.isString(value)){ this.model.image = value}
+    else if(Thing.isObject(value)){ this.model.image = value}
     else{ Thing.logError(this.type+' image must be string, or object'); }
 
   }
 
   //TODO
-  get mainEntityOfPage(){ return this.computed.mainEntityOfPage; }
+  get mainEntityOfPage(){ return this.model.mainEntityOfPage; }
   set mainEntityOfPage(value){
-  if(Thing.isEmpty(value)){ this.computed.mainEntityOfPage = ''}
-    else if(Thing.isString(value)){ this.computed.mainEntityOfPage = value}
-    else if(Thing.isObject(value)){ this.computed.mainEntityOfPage = value}
+  if(Thing.isEmpty(value)){ this.model.mainEntityOfPage = ''}
+    else if(Thing.isString(value)){ this.model.mainEntityOfPage = value}
+    else if(Thing.isObject(value)){ this.model.mainEntityOfPage = value}
     else{ Thing.logError(this.type+' mainEntityOfPage must be string, or object'); }
 
   }
 
-  get name(){ return this.computed.name; }
+  get name(){ return this.model.name; }
   set name(value){
-  if(Thing.isEmpty(value)){ this.computed.name = ''}
-    else if(Thing.isString(value)){ this.computed.name = value}
+  if(Thing.isEmpty(value)){ this.model.name = ''}
+    else if(Thing.isString(value)){ this.model.name = value}
     else{ Thing.logError(this.type+' name must be string'); }
   }
 
   //TODO
-  get potentialAction(){ return this.computed.potentialAction; }
+  get potentialAction(){ return this.model.potentialAction; }
   set potentialAction(value){
-  if(Thing.isEmpty(value)){ this.computed.potentialAction = ''}
-    else if(Thing.isString(value)){ this.computed.potentialAction = value}
-    else if(Thing.isObject(value)){ this.computed.potentialAction = value}
+  if(Thing.isEmpty(value)){ this.model.potentialAction = ''}
+    else if(Thing.isString(value)){ this.model.potentialAction = value}
+    else if(Thing.isObject(value)){ this.model.potentialAction = value}
     else{ Thing.logError(this.type+' potentialAction must be string or object'); }
 
   }
 
-  get sameAs(){ return this.computed.sameAs; }
+  get sameAs(){ return this.model.sameAs; }
   set sameAs(value){
-  if(Thing.isEmpty(value)){ this.computed.sameAs = ''}
-    else if(Thing.isString(value)){ this.computed.sameAs = value}
-    else if(Thing.isURL(value)){ this.computed.sameAs = value}
+  if(Thing.isEmpty(value)){ this.model.sameAs = ''}
+    else if(Thing.isString(value)){ this.model.sameAs = value}
+    else if(Thing.isURL(value)){ this.model.sameAs = value}
     else{ Thing.logError(this.type+' sameAs must be string'); }
 
   }
 
-  get url(){ return this.computed.url; }
+  get url(){ return this.model.url; }
   set url(value){
-    if(Thing.isEmpty(value)){ this.computed.url = ''}
-    else if(Thing.isURL(value)){ this.computed.url = value}
+    if(Thing.isEmpty(value)){ this.model.url = ''}
+    else if(Thing.isURL(value)){ this.model.url = value}
     else{ Thing.logError(this.type+' url must be string'); }
   }
 
