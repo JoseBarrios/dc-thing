@@ -1,5 +1,5 @@
 {
-  "name": "dc-thing",
+  "name": "@josebarrios/dc-thing",
   "version": "1.0.0-beta",
   "description": "Data controller for 'thing' that conforms to Schema.org",
   "main": "index.js",
