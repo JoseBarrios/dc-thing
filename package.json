@@ -24,6 +24,8 @@
     "mocha": "^3.4.2"
   },
   "dependencies": {
-    "lodash": "^4.17.4"
+    "colors": "^1.1.2",
+    "lodash": "^4.17.4",
+    "schema-dot-org": "^0.1.5"
   }
 }
