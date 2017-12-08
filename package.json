@@ -26,6 +26,6 @@
   "dependencies": {
     "colors": "^1.1.2",
     "lodash": "^4.17.4",
-    "schema-dot-org": "^0.1.5"
+    "schema-dot-org": "^0.1.7"
   }
 }

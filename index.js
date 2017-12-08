@@ -1,10 +1,12 @@
 'use strict'
 
 const colors = require('colors/safe');
+
 const schemaOrg = require('schema-dot-org');
 const lodash = require('lodash');
-const EMPTY = '';
-const TYPE = 'Thing';
+const events = require('events');
+const eventEmitter = new events.EventEmitter();
+
 
 class Thing {
 
@@ -13,11 +15,17 @@ class Thing {
   // Static Methods
   //
   /////////////////////
-	static isURL(value, debugging){
-		return Thing.validate(value, Thing.schema.url, debugging);
+	static isURL(value){
+		return schemaOrg.isValid(value, schemaOrg.url);
   }
+
+	static validationError(value, schema){
+		return schemaOrg.validationError(value, schema);
+	}
+
+
   static isText(value, debugging){
-		return Thing.validate(value, Thing.schema.text, debugging);
+		return Thing.isValid(value, Thing.schema.text, debugging);
   }
 
 
@@ -38,8 +46,8 @@ class Thing {
     return isEmpty;
   }
 
-	static validate(value, schema, debugging=false){
-		return schemaOrg.validate(value, schema, debugging);
+	static isValid(value, schema){
+		return schemaOrg.isValid(value, schema);
 	}
 
 	static keys(thing){
@@ -142,49 +150,71 @@ class Thing {
 
 	//STATIC GETTERS
 	static get schema(){ return schemaOrg; }
-  static get type(){ return TYPE; }
+  static get type(){ return 'Thing'; }
   static get utils(){ return lodash; }
-
-
-  constructor(model){
-    model = model || {};
-    //Initialize model props
-    this.model = {};
-    this.state = {};
-
-		//Disable debugging by default
-		this.debugging = false;
-		//Private
-    this.type = this.constructor.name;
-
-    //Assign properties from model
-    this.additionalType = model.additionalType;
-    this.alternateName = model.alternateName;
-    this.description = model.description;
-    this.disambiguatingDescription = model.disambiguatingDescription;
-    this.identifier = model.identifier;
-    this.image = model.image;
-    this.mainEntityOfPage = model.mainEntityOfPage;
-    this.name = model.name;
-    this.potentialAction = model.potentialAction;
-    this.sameAs = model.sameAs;
-    this.url = model.url;
-
-  }
 
   //IMMUTABLE
   get type() { return this.constructor.name }
   set type(value) { this._type = this.constructor.name}
 
-  get additionalType(){ return this.model.additionalType; }
-  set additionalType(value){
+	//TODO eventually expand outside of just server models (localstorage, etc)
+  constructor(baseURL){
+    //Initialize model props
+    this.model = {};
+    this.state = {};
+
+
+		//Disable debugging by default
+		this.debugging = false;
+		//Private
+    this.type = this.constructor.name;
+		this.baseURL = baseURL || '/';
+
+    //Assign properties from model
+    //this.additionalType = model.additionalType;
+/*    this.alternateName = model.alternateName;*/
+    //this.description = model.description;
+    //this.disambiguatingDescription = model.disambiguatingDescription;
+    //this.identifier = model.identifier;
+    //this.image = model.image;
+    //this.mainEntityOfPage = model.mainEntityOfPage;
+    //this.name = model.name;
+    //this.potentialAction = model.potentialAction;
+    //this.sameAs = model.sameAs;
+    /*this.url = model.url;*/
+	}
+
+
+	on(eventName, callback){
+		eventEmitter.on(eventName, callback);
+	}
+
+
+	get additionalType(){ return this.model.additionalType}
+	set additionalType(value){
+		//DELETE
 		if(!value) return;
-		if(Thing.isURL(value, this.debugging)){
+
+		//PUT
+		else if (Thing.isURL(value)){
+			let change = {};
+			change.propertyName = 'additionalType';
+			change.oldValue = this.model.additionalType;
+			change.newValue = value;
+			//SET IN SERVER/PERSISTANT MEM
 			this.model.additionalType = value;
-		} else {
-			Thing.typeError('Thing: additionalType should be URL (reverting change)')
+			eventEmitter.emit('change', change)
 		}
-  }
+		//ERROR
+		else {
+			let error = {};
+			error.propertyName = 'additionalType';
+			error.message = Thing.validationError(value, schemaOrg.url).message;
+			throw new Error(error.message);
+			eventEmitter.emit('error', error);
+		}
+	}
+
 
   get alternateName(){ return this.model.alternateName; }
   set alternateName(value){
