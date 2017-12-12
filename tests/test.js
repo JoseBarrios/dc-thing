@@ -1,7 +1,7 @@
 'use strict'
 
 var assert = require('assert');
-var Thing = require('../index.js');
+var ThingDataController = require('../index.js');
 
 var model = {};
 model.name = 'Jose Barrios';
@@ -9,166 +9,166 @@ model.identifier = '1234';
 model.additionalType = '';
 model.alternateName = undefined;
 model.description = null;
-var thing = new Thing(model);
+var thing = new ThingDataController(model);
 console.log(thing)
 
-describe('Thing Class\n', function() {
+describe('ThingDataController Class\n', function() {
 
   describe('Static Methods:', function() {
-    describe('Thing.isNumber(value)', function() {
+    describe('ThingDataController.isNumber(value)', function() {
       it('should return true if value is a number, false otherwise', function() {
-        assert.equal(Thing.isNumber(1), true);
-        assert.equal(Thing.isNumber('string'), false);
-        assert.equal(Thing.isNumber(''), false);
-        assert.equal(Thing.isNumber(true), false);
-        assert.equal(Thing.isNumber(false), false);
-        assert.equal(Thing.isNumber([]), false);
-        assert.equal(Thing.isNumber({}), false);
-        assert.equal(Thing.isNumber(null), false);
-        assert.equal(Thing.isNull(undefined), false);
+        assert.equal(ThingDataController.isNumber(1), true);
+        assert.equal(ThingDataController.isNumber('string'), false);
+        assert.equal(ThingDataController.isNumber(''), false);
+        assert.equal(ThingDataController.isNumber(true), false);
+        assert.equal(ThingDataController.isNumber(false), false);
+        assert.equal(ThingDataController.isNumber([]), false);
+        assert.equal(ThingDataController.isNumber({}), false);
+        assert.equal(ThingDataController.isNumber(null), false);
+        assert.equal(ThingDataController.isNull(undefined), false);
 
         //TODO: make test for this static method
-        //assert.equal(Thing.validateInputType('number', 1, 'whatever'), true)
+        //assert.equal(ThingDataController.validateInputType('number', 1, 'whatever'), true)
       });
     });
-    describe('Thing.isString(value)', function() {
+    describe('ThingDataController.isString(value)', function() {
       it('should return true if value is string, false otherwise', function() {
-        assert.equal(Thing.isString(1), false);
-        assert.equal(Thing.isString('string'), true);
-        assert.equal(Thing.isString(''), true);
-        assert.equal(Thing.isString(true), false);
-        assert.equal(Thing.isString(false), false);
-        assert.equal(Thing.isString([]), false);
-        assert.equal(Thing.isString({}), false);
-        assert.equal(Thing.isString(null), false);
-        assert.equal(Thing.isNull(undefined), false);
+        assert.equal(ThingDataController.isString(1), false);
+        assert.equal(ThingDataController.isString('string'), true);
+        assert.equal(ThingDataController.isString(''), true);
+        assert.equal(ThingDataController.isString(true), false);
+        assert.equal(ThingDataController.isString(false), false);
+        assert.equal(ThingDataController.isString([]), false);
+        assert.equal(ThingDataController.isString({}), false);
+        assert.equal(ThingDataController.isString(null), false);
+        assert.equal(ThingDataController.isNull(undefined), false);
       });
     });
-    describe('Thing.isBoolean(value)', function() {
+    describe('ThingDataController.isBoolean(value)', function() {
       it('should return true if value is boolean, false otherwise', function() {
-        assert.equal(Thing.isBoolean(1), false);
-        assert.equal(Thing.isBoolean('string'), false);
-        assert.equal(Thing.isBoolean(''), false);
-        assert.equal(Thing.isBoolean(true), true);
-        assert.equal(Thing.isBoolean(false), true);
-        assert.equal(Thing.isBoolean([]), false);
-        assert.equal(Thing.isBoolean({}), false);
-        assert.equal(Thing.isBoolean(null), false);
-        assert.equal(Thing.isNull(undefined), false);
+        assert.equal(ThingDataController.isBoolean(1), false);
+        assert.equal(ThingDataController.isBoolean('string'), false);
+        assert.equal(ThingDataController.isBoolean(''), false);
+        assert.equal(ThingDataController.isBoolean(true), true);
+        assert.equal(ThingDataController.isBoolean(false), true);
+        assert.equal(ThingDataController.isBoolean([]), false);
+        assert.equal(ThingDataController.isBoolean({}), false);
+        assert.equal(ThingDataController.isBoolean(null), false);
+        assert.equal(ThingDataController.isNull(undefined), false);
       });
     });
-    describe('Thing.isArray(value)', function() {
+    describe('ThingDataController.isArray(value)', function() {
       it('should return true if value is array, false otherwise', function() {
-        assert.equal(Thing.isArray(1), false);
-        assert.equal(Thing.isArray('string'), false);
-        assert.equal(Thing.isArray(''), false);
-        assert.equal(Thing.isArray(true), false);
-        assert.equal(Thing.isArray(false), false);
-        assert.equal(Thing.isArray([]), true);
-        assert.equal(Thing.isArray({}), false);
-        assert.equal(Thing.isArray(null), false);
-        assert.equal(Thing.isNull(undefined), false);
+        assert.equal(ThingDataController.isArray(1), false);
+        assert.equal(ThingDataController.isArray('string'), false);
+        assert.equal(ThingDataController.isArray(''), false);
+        assert.equal(ThingDataController.isArray(true), false);
+        assert.equal(ThingDataController.isArray(false), false);
+        assert.equal(ThingDataController.isArray([]), true);
+        assert.equal(ThingDataController.isArray({}), false);
+        assert.equal(ThingDataController.isArray(null), false);
+        assert.equal(ThingDataController.isNull(undefined), false);
       });
     });
-    describe('Thing.isObject(value)', function() {
+    describe('ThingDataController.isObject(value)', function() {
       it('should return true if value is plain object, false otherwise', function() {
-        assert.equal(Thing.isObject(1), false);
-        assert.equal(Thing.isObject('string'), false);
-        assert.equal(Thing.isObject(''), false);
-        assert.equal(Thing.isObject(true), false);
-        assert.equal(Thing.isObject(false), false);
-        assert.equal(Thing.isObject([1,2,3]), true);
-        assert.equal(Thing.isObject({}), true);
-        assert.equal(Thing.isObject({ "hello" : "world"}), true);
-        assert.equal(Thing.isObject({ hello : "world"}), true);
-        assert.equal(Thing.isObject({ greeting : {hello: "world"}}), true);
-        assert.equal(Thing.isObject(null), false);
-        assert.equal(Thing.isNull(undefined), false);
+        assert.equal(ThingDataController.isObject(1), false);
+        assert.equal(ThingDataController.isObject('string'), false);
+        assert.equal(ThingDataController.isObject(''), false);
+        assert.equal(ThingDataController.isObject(true), false);
+        assert.equal(ThingDataController.isObject(false), false);
+        assert.equal(ThingDataController.isObject([1,2,3]), true);
+        assert.equal(ThingDataController.isObject({}), true);
+        assert.equal(ThingDataController.isObject({ "hello" : "world"}), true);
+        assert.equal(ThingDataController.isObject({ hello : "world"}), true);
+        assert.equal(ThingDataController.isObject({ greeting : {hello: "world"}}), true);
+        assert.equal(ThingDataController.isObject(null), false);
+        assert.equal(ThingDataController.isNull(undefined), false);
       });
     });
-    describe('Thing.isPlainObject(value)', function() {
+    describe('ThingDataController.isPlainObject(value)', function() {
       it('should return true if value is plain object, false otherwise', function() {
-        assert.equal(Thing.isPlainObject(1), false);
-        assert.equal(Thing.isPlainObject('string'), false);
-        assert.equal(Thing.isPlainObject(''), false);
-        assert.equal(Thing.isPlainObject(true), false);
-        assert.equal(Thing.isPlainObject(false), false);
-        assert.equal(Thing.isPlainObject([]), false);
-        assert.equal(Thing.isPlainObject({}), true);
-        assert.equal(Thing.isPlainObject({ "hello" : "world"}), true);
-        assert.equal(Thing.isPlainObject({ hello : "world"}), true);
-        assert.equal(Thing.isPlainObject({ greeting : {hello: "world"}}), true);
-        assert.equal(Thing.isPlainObject(null), false);
-        assert.equal(Thing.isNull(undefined), false);
+        assert.equal(ThingDataController.isPlainObject(1), false);
+        assert.equal(ThingDataController.isPlainObject('string'), false);
+        assert.equal(ThingDataController.isPlainObject(''), false);
+        assert.equal(ThingDataController.isPlainObject(true), false);
+        assert.equal(ThingDataController.isPlainObject(false), false);
+        assert.equal(ThingDataController.isPlainObject([]), false);
+        assert.equal(ThingDataController.isPlainObject({}), true);
+        assert.equal(ThingDataController.isPlainObject({ "hello" : "world"}), true);
+        assert.equal(ThingDataController.isPlainObject({ hello : "world"}), true);
+        assert.equal(ThingDataController.isPlainObject({ greeting : {hello: "world"}}), true);
+        assert.equal(ThingDataController.isPlainObject(null), false);
+        assert.equal(ThingDataController.isNull(undefined), false);
       });
     });
 
-    describe('Thing.isNull(value)', function() {
+    describe('ThingDataController.isNull(value)', function() {
       it('should return true if value is null, false otherwise', function() {
-        assert.equal(Thing.isNull(1), false);
-        assert.equal(Thing.isNull('string'), false);
-        assert.equal(Thing.isNull(''), false);
-        assert.equal(Thing.isNull(true), false);
-        assert.equal(Thing.isNull(false), false);
-        assert.equal(Thing.isNull([]), false);
-        assert.equal(Thing.isNull({}), false);
-        assert.equal(Thing.isNull(null), true);
-        assert.equal(Thing.isNull(undefined), false);
+        assert.equal(ThingDataController.isNull(1), false);
+        assert.equal(ThingDataController.isNull('string'), false);
+        assert.equal(ThingDataController.isNull(''), false);
+        assert.equal(ThingDataController.isNull(true), false);
+        assert.equal(ThingDataController.isNull(false), false);
+        assert.equal(ThingDataController.isNull([]), false);
+        assert.equal(ThingDataController.isNull({}), false);
+        assert.equal(ThingDataController.isNull(null), true);
+        assert.equal(ThingDataController.isNull(undefined), false);
       });
     });
-    describe('Thing.isEmpty(value)', function() {
+    describe('ThingDataController.isEmpty(value)', function() {
       it('should return true if value is string, false otherwise', function() {
-        assert.equal(Thing.isEmpty(1), false);
-        assert.equal(Thing.isEmpty('string'), false);
-        assert.equal(Thing.isEmpty(''), true);
-        assert.equal(Thing.isEmpty(true), false);
-        assert.equal(Thing.isEmpty(false), false);
-        assert.equal(Thing.isEmpty([]), true);
-        assert.equal(Thing.isEmpty({}), true);
-        assert.equal(Thing.isEmpty(null), true);
-        assert.equal(Thing.isEmpty(undefined), true);
+        assert.equal(ThingDataController.isEmpty(1), false);
+        assert.equal(ThingDataController.isEmpty('string'), false);
+        assert.equal(ThingDataController.isEmpty(''), true);
+        assert.equal(ThingDataController.isEmpty(true), false);
+        assert.equal(ThingDataController.isEmpty(false), false);
+        assert.equal(ThingDataController.isEmpty([]), true);
+        assert.equal(ThingDataController.isEmpty({}), true);
+        assert.equal(ThingDataController.isEmpty(null), true);
+        assert.equal(ThingDataController.isEmpty(undefined), true);
       });
     });
 
-    describe('Thing.isValidJSONInput(value)', function() {
+    describe('ThingDataController.isValidJSONInput(value)', function() {
       it('should return true if value is JSON supported, false otherwise', function() {
-        assert.equal(Thing.isValidJSONInput(1), true);
-        assert.equal(Thing.isValidJSONInput('string'), true);
-        assert.equal(Thing.isValidJSONInput(''), true);
-        assert.equal(Thing.isValidJSONInput(true), true);
-        assert.equal(Thing.isValidJSONInput(true), true);
-        assert.equal(Thing.isValidJSONInput([]), true);
-        assert.equal(Thing.isValidJSONInput({}), true);
-        assert.equal(Thing.isValidJSONInput(null), true);
-        assert.equal(Thing.isValidJSONInput(undefined), false);
+        assert.equal(ThingDataController.isValidJSONInput(1), true);
+        assert.equal(ThingDataController.isValidJSONInput('string'), true);
+        assert.equal(ThingDataController.isValidJSONInput(''), true);
+        assert.equal(ThingDataController.isValidJSONInput(true), true);
+        assert.equal(ThingDataController.isValidJSONInput(true), true);
+        assert.equal(ThingDataController.isValidJSONInput([]), true);
+        assert.equal(ThingDataController.isValidJSONInput({}), true);
+        assert.equal(ThingDataController.isValidJSONInput(null), true);
+        assert.equal(ThingDataController.isValidJSONInput(undefined), false);
       });
     });
-    describe('Thing.isURL(value)', function() {
+    describe('ThingDataController.isURL(value)', function() {
       it('should return true if value is a valid URL, false otherwise', function() {
-        assert.equal(Thing.isURL('www.google.com'), true);
-        assert.equal(Thing.isURL('google.com'), true);
-        assert.equal(Thing.isURL('http://google.com'), true);
-        assert.equal(Thing.isURL('https://google.com'), true);
-        assert.equal(Thing.isURL('https://google.com/something'), true);
-        assert.equal(Thing.isURL('https://google.com/something?value=true'), true);
-        assert.equal(Thing.isURL(1), false);
-        assert.equal(Thing.isURL('string'), false);
-        assert.equal(Thing.isURL(''), false);
-        assert.equal(Thing.isURL(true), false);
-        assert.equal(Thing.isURL(true), false);
-        assert.equal(Thing.isURL([]), false);
-        assert.equal(Thing.isURL({}), false);
-        assert.equal(Thing.isURL(null), false);
-        assert.equal(Thing.isURL(undefined), false);
+        assert.equal(ThingDataController.isURL('www.google.com'), true);
+        assert.equal(ThingDataController.isURL('google.com'), true);
+        assert.equal(ThingDataController.isURL('http://google.com'), true);
+        assert.equal(ThingDataController.isURL('https://google.com'), true);
+        assert.equal(ThingDataController.isURL('https://google.com/something'), true);
+        assert.equal(ThingDataController.isURL('https://google.com/something?value=true'), true);
+        assert.equal(ThingDataController.isURL(1), false);
+        assert.equal(ThingDataController.isURL('string'), false);
+        assert.equal(ThingDataController.isURL(''), false);
+        assert.equal(ThingDataController.isURL(true), false);
+        assert.equal(ThingDataController.isURL(true), false);
+        assert.equal(ThingDataController.isURL([]), false);
+        assert.equal(ThingDataController.isURL({}), false);
+        assert.equal(ThingDataController.isURL(null), false);
+        assert.equal(ThingDataController.isURL(undefined), false);
       });
     });
-    describe('Thing.model', function() {
+    describe('ThingDataController.model', function() {
       it('should return the serialized version of the class model', function() {
         thing.description = 'description'
-        assert.equal(Thing.model(thing).description, 'description');
+        assert.equal(ThingDataController.model(thing).description, 'description');
       });
     });
-    describe('Thing.unsetProperties', function() {
+    describe('ThingDataController.unsetProperties', function() {
       it('should return the instance empty properties (array form)', function() {
         let test = [];
         test.push('additionalType');
@@ -179,7 +179,7 @@ describe('Thing Class\n', function() {
         test.push('potentialAction');
         test.push('sameAs');
         test.push('url');
-        assert.deepStrictEqual(Thing.unsetProperties(thing), test);
+        assert.deepStrictEqual(ThingDataController.unsetProperties(thing), test);
       });
       it('should return the instance empty properties (object form)', function() {
         let test = {};
@@ -191,48 +191,48 @@ describe('Thing Class\n', function() {
         test['potentialAction'] = '';
         test['sameAs'] = '';
         test['url'] = '';
-        assert.deepStrictEqual(Thing.unsetProperties(thing, 'object'), test);
+        assert.deepStrictEqual(ThingDataController.unsetProperties(thing, 'object'), test);
       });
     });
-    describe('Thing.assignedProperties', function() {
+    describe('ThingDataController.assignedProperties', function() {
       it('should return the instance empty properties (array form)', function() {
         let test = [];
         test.push('description');
         test.push('identifier');
         test.push('name');
         test.push('type');
-        assert.deepStrictEqual(Thing.assignedProperties(thing, 'array'), test);
+        assert.deepStrictEqual(ThingDataController.assignedProperties(thing, 'array'), test);
       });
       it('should return the instance empty properties (object form)', function() {
         let test = {};
         test['description'] = 'description';
         test['identifier'] = '1234';
         test['name'] = 'Jose Barrios';
-        test['type'] = 'Thing';
-        assert.deepStrictEqual(Thing.assignedProperties(thing, 'object'), test);
+        test['type'] = 'ThingDataController';
+        assert.deepStrictEqual(ThingDataController.assignedProperties(thing, 'object'), test);
       });
     });
 
-    describe('Thing.keys', function() {
+    describe('ThingDataController.keys', function() {
       it('should return the object key names in array', function() {
-        assert.equal(Thing.keys(thing).includes('description'), true);
+        assert.equal(ThingDataController.keys(thing).includes('description'), true);
       });
     });
-    describe('Thing.values', function() {
+    describe('ThingDataController.values', function() {
       it('should return the object values in array', function() {
         thing.description = 'description';
-        assert.equal(Thing.values(thing).includes('description'), true);
+        assert.equal(ThingDataController.values(thing).includes('description'), true);
       });
     });
-    describe('Thing.isInstance', function() {
+    describe('ThingDataController.isInstance', function() {
       it('should return the true if param is an instance of this class', function() {
-        assert.equal(Thing.isInstance(thing), true);
-        assert.equal(Thing.isInstance({}), false);
+        assert.equal(ThingDataController.isInstance(thing), true);
+        assert.equal(ThingDataController.isInstance({}), false);
       });
     });
-    describe('Thing.type', function() {
+    describe('ThingDataController.type', function() {
       it('should return the type of this class\n', function() {
-        assert.equal(Thing.type, 'Thing');
+        assert.equal(ThingDataController.type, 'ThingDataController');
       });
     });
 
@@ -251,8 +251,8 @@ describe('Thing Class\n', function() {
 
     describe('thing.type', function() {
       it('should return the class type', function() {
-        assert.equal(thing.type, 'Thing');
-        assert.equal(thing.type, Thing.type);
+        assert.equal(thing.type, 'ThingDataController');
+        assert.equal(thing.type, ThingDataController.type);
       });
     });
 
