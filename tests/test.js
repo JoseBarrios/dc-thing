@@ -1,7 +1,5 @@
 'use strict'
 
-var assert = require('assert');
-var ThingDataController = require('../index.js');
 
 var model = {};
 model.name = 'Jose Barrios';
@@ -9,8 +7,9 @@ model.identifier = '1234';
 model.additionalType = '';
 model.alternateName = undefined;
 model.description = null;
+var assert = require('assert');
+var ThingDataController = require('../index.js');
 var thing = new ThingDataController(model);
-console.log(thing)
 
 describe('ThingDataController Class\n', function() {
 
