@@ -23,9 +23,9 @@ class ThingDataController {
 	static isEmpty(value){
 		let isEmpty = false;
 		if(ThingDataController.isArray(value) || ThingDataController.isObject(value)){ isEmpty = lodash.isEmpty(value); }
-		if(value === ''){ isEmpty = true; }
-		if(value === undefined){ isEmpty = true; }
-		if(value === null){ isEmpty = true; }
+		else if(value === ''){ isEmpty = true; }
+		else if(value === undefined){ isEmpty = true; }
+		else if(value === null){ isEmpty = true; }
 		return isEmpty;
 	}
 
@@ -111,9 +111,9 @@ class ThingDataController {
 
 
 	static isValidJSONInput(value){
-		return ThingDataController.isNumber(value)  ||
-			ThingDataController.isString(value)       ||
-			ThingDataController.isBoolean(value)      ||
+        return ThingDataController.isNumber(value)  ||
+            ThingDataController.isString(value)       ||
+            ThingDataController.isBoolean(value)      ||
 			ThingDataController.isArray(value)        ||
 			ThingDataController.isObject(value)       ||
 			ThingDataController.isNull(value);
@@ -173,7 +173,7 @@ class ThingDataController {
 
 	get additionalType(){ return this.model.additionalType; }
 	set additionalType(value){
-		if(ThingDataController.isEmpty(value)){ this.model.additionalType = ''}
+		if(ThingDataController.isNull(value)){ delete this.model.additionalType; }
 		else if(ThingDataController.isString(value)){ this.model.additionalType = value}
 		else if(ThingDataController.isObject(value)){ this.model.additionalType = value}
 		else if(ThingDataController.isArray(value)){ this.model.additionalType = value}
@@ -182,7 +182,7 @@ class ThingDataController {
 
 	get alternateName(){ return this.model.alternateName; }
 	set alternateName(value){
-		if(ThingDataController.isEmpty(value)){ this.model.alternateName = ''}
+		if(ThingDataController.isNull(value)){ delete this.model.alternateName; }
 		else if(ThingDataController.isString(value)){ this.model.alternateName = value}
 		else{ ThingDataController.logError(this.type+' alternateName must be string'); }
 
@@ -190,7 +190,7 @@ class ThingDataController {
 
 	get description(){ return this.model.description; }
 	set description(value){
-		if(ThingDataController.isEmpty(value)){ this.model.description = ''}
+		if(ThingDataController.isNull(value)){ delete this.model.description; }
 		else if(ThingDataController.isString(value)){ this.model.description = value}
 		else{ ThingDataController.logError(this.type+' description must be string'); }
 
@@ -198,7 +198,7 @@ class ThingDataController {
 
 	get disambiguatingDescription(){ return this.model.disambiguatingDescription; }
 	set disambiguatingDescription(value){
-		if(ThingDataController.isEmpty(value)){ this.model.disambiguatingDescription = ''}
+		if(ThingDataController.isNull(value)){ delete this.model.disambiguatingDescription; }
 		else if(ThingDataController.isString(value)){ this.model.disambiguatingDescription = value}
 		else{ ThingDataController.logError(this.type+' disambiguatingDescription must be string'); }
 
@@ -206,7 +206,7 @@ class ThingDataController {
 
 	get identifier(){ return this.model.identifier; }
 	set identifier(value){
-		if(ThingDataController.isEmpty(value)){ this.model.identifier = ''}
+		if(ThingDataController.isNull(value)){ delete this.model.identifier; }
 		else if(ThingDataController.isString(value)){ this.model.identifier = value}
 		else if(ThingDataController.isObject(value)){ this.model.identifier = value}
 		else if(ThingDataController.isNumber(value)){ this.model.identifier = value}
@@ -216,7 +216,7 @@ class ThingDataController {
 
 	get image(){ return this.model.image; }
 	set image(value){
-		if(ThingDataController.isEmpty(value)){ this.model.image = ''}
+		if(ThingDataController.isNull(value)){ delete this.model.image; }
 		else if(ThingDataController.isString(value)){ this.model.image = value}
 		else if(ThingDataController.isObject(value)){ this.model.image = value}
 		else{ ThingDataController.logError(this.type+' image must be string, or object'); }
@@ -226,7 +226,7 @@ class ThingDataController {
 	//TODO
 	get mainEntityOfPage(){ return this.model.mainEntityOfPage; }
 	set mainEntityOfPage(value){
-		if(ThingDataController.isEmpty(value)){ this.model.mainEntityOfPage = ''}
+		if(ThingDataController.isNull(value)){ delete this.model.mainEntityOfPage; }
 		else if(ThingDataController.isString(value)){ this.model.mainEntityOfPage = value}
 		else if(ThingDataController.isObject(value)){ this.model.mainEntityOfPage = value}
 		else{ ThingDataController.logError(this.type+' mainEntityOfPage must be string, or object'); }
@@ -235,7 +235,7 @@ class ThingDataController {
 
 	get name(){ return this.model.name; }
 	set name(value){
-		if(ThingDataController.isEmpty(value)){ this.model.name = ''}
+		if(ThingDataController.isNull(value)){ delete this.model.name; }
 		else if(ThingDataController.isString(value)){ this.model.name = value}
 		else{ ThingDataController.logError(this.type+' name must be string'); }
 	}
@@ -243,7 +243,7 @@ class ThingDataController {
 	//TODO
 	get potentialAction(){ return this.model.potentialAction; }
 	set potentialAction(value){
-		if(ThingDataController.isEmpty(value)){ this.model.potentialAction = ''}
+		if(ThingDataController.isNull(value)){ delete this.model.potentialAction; }
 		else if(ThingDataController.isString(value)){ this.model.potentialAction = value}
 		else if(ThingDataController.isObject(value)){ this.model.potentialAction = value}
 		else{ ThingDataController.logError(this.type+' potentialAction must be string or object'); }
@@ -252,7 +252,7 @@ class ThingDataController {
 
 	get sameAs(){ return this.model.sameAs; }
 	set sameAs(value){
-		if(ThingDataController.isEmpty(value)){ this.model.sameAs = ''}
+		if(ThingDataController.isNull(value)){ delete this.model.sameAs; }
 		else if(ThingDataController.isString(value)){ this.model.sameAs = value}
 		else if(ThingDataController.isURL(value)){ this.model.sameAs = value}
 		else{ ThingDataController.logError(this.type+' sameAs must be string'); }
@@ -261,7 +261,7 @@ class ThingDataController {
 
 	get url(){ return this.model.url; }
 	set url(value){
-		if(ThingDataController.isEmpty(value)){ this.model.url = ''}
+		if(ThingDataController.isNull(value)){ delete this.model.url; }
 		else if(ThingDataController.isURL(value)){ this.model.url = value}
 		else{ ThingDataController.logError(this.type+' url must be string'); }
 	}
