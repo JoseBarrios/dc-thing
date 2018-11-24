@@ -151,7 +151,7 @@ class ThingDataController {
 	constructor(model){
 		model = model || {};
 		//Initialize model props
-		this.model = {};
+		this.model = model;
 		//Assign properties
 		this.additionalType = model.additionalType;
 		this.alternateName = model.alternateName;
