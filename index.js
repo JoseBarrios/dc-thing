@@ -1,7 +1,7 @@
 "use strict"
 
 const lodash = require("lodash");
-const chalk = require("chalk")
+const moment = require("moment");
 
 class ThingDataController {
 
@@ -61,7 +61,8 @@ class ThingDataController {
 	static isInstance(object){ return object.type === ThingDataController.type; }
     // Because this method is static, we must create an instance
 	static get type(){ return new ThingDataController().type ; }
-	static get utils(){ return lodash; }
+	static get lodash(){ return lodash; }
+	static get moment(){ return moment; }
 
 	constructor(model){
 		model = model || {};
