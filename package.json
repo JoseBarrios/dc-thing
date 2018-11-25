@@ -1,6 +1,6 @@
 {
   "name": "dc-thing",
-  "version": "0.3.3",
+  "version": "0.3.4",
   "description": "Data controller for 'thing' that conforms to Schema.org",
   "main": "index.js",
   "scripts": {
