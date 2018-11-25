@@ -2,6 +2,7 @@
 
 const lodash = require("lodash");
 const moment = require("moment");
+const dateTime = require("dc-date-time");
 
 class ThingDataController {
 
@@ -19,6 +20,7 @@ class ThingDataController {
 	static isEmpty(value){ return lodash.isEmpty(value); }
 	static isEmptyString(value){ return value === ""; }
 	static isNullOrUndefined(value){ return lodash.isNull(value) || lodash.isUndefined(value); }
+    static isDate(value){ return dateTime.isValidDate(value); }
 
     static isUrl(value){ return ThingDataController.isURL(value); }
 	static isURL(value){
@@ -63,6 +65,7 @@ class ThingDataController {
 	static get type(){ return new ThingDataController().type ; }
 	static get lodash(){ return lodash; }
 	static get moment(){ return moment; }
+	static get dateTime(){ return dateTime; }
 
 	constructor(model){
 		model = model || {};
