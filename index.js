@@ -87,6 +87,9 @@ class ThingDataController {
 
 	//IMMUTABLE
 	get type() { return this.constructor.name }
+	get lodash(){ return lodash; }
+	get moment(){ return moment; }
+	get dateTime(){ return dateTime; }
 
 	get additionalType(){ return this.model.additionalType; }
 	set additionalType(value){
