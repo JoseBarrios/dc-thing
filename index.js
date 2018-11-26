@@ -2,7 +2,7 @@
 
 const lodash = require("lodash");
 const moment = require("moment");
-const dateTime = require("dc-date-time");
+const DateTime = require("dc-date-time");
 
 class ThingDataController {
 
@@ -20,7 +20,7 @@ class ThingDataController {
 	static isEmpty(value){ return lodash.isEmpty(value); }
 	static isEmptyString(value){ return value === ""; }
 	static isNullOrUndefined(value){ return lodash.isNull(value) || lodash.isUndefined(value); }
-    static isDate(value){ return dateTime.isValidDate(value); }
+    static isDate(value){ return DateTime.isValidDate(value); }
 
     static isUrl(value){ return ThingDataController.isURL(value); }
 	static isURL(value){
@@ -65,12 +65,18 @@ class ThingDataController {
 	static get type(){ return new ThingDataController().type ; }
 	static get lodash(){ return lodash; }
 	static get moment(){ return moment; }
-	static get dateTime(){ return dateTime; }
+	static get dateTime(){ return new DateTime(); }
 
 	constructor(model){
 		model = model || {};
 		//Initialize model props
 		this.model = model;
+
+        this.controller = {};
+        this.controller.dateTime = new DateTime();
+        this.controller.moment = moment;
+        this.controller.lodash = moment;
+
 		//Assign properties
 		this.additionalType = model.additionalType;
 		this.alternateName = model.alternateName;
@@ -87,9 +93,9 @@ class ThingDataController {
 
 	//IMMUTABLE
 	get type() { return this.constructor.name }
-	get lodash(){ return lodash; }
-	get moment(){ return moment; }
-	get dateTime(){ return dateTime; }
+	get lodash(){ return this.controller.lodash; }
+	get moment(){ return this.controller.moment; }
+	get dateTime(){ return this.controller.dateTime; }
 
 	get additionalType(){ return this.model.additionalType; }
 	set additionalType(value){

@@ -120,17 +120,18 @@ describe('ThingDataController Class\n', function() {
 
         describe('ThingDataController.isDate(value)', function() {
             it('should return true if value is is an ISO8601 date, false otherwise', function() {
-                assert.equal(ThingDataController.isDate(1), false, "isDate(1)");
                 assert.equal(ThingDataController.isDate('string'), false, "isDate('string')");
                 assert.equal(ThingDataController.isDate(''), false, "isDate('')");
                 assert.equal(ThingDataController.isDate(true), false, "isDate(true)");
                 assert.equal(ThingDataController.isDate(false), false, "isDate(false)");
-                assert.equal(ThingDataController.isDate([]), false, "isDate([])");
-                assert.equal(ThingDataController.isDate({}), false, "isDate({})");
-                assert.equal(ThingDataController.isDate(Date.now()), false, "isDate(Date.now())")
-                assert.equal(ThingDataController.isDate(ThingDataController.moment().format()), true, "isDate(moment().format())")
                 assert.equal(ThingDataController.isDate(null), false, "isDate(null)");
-                assert.equal(ThingDataController.isDate(undefined), false, "isDate(undefined)");
+
+                assert.equal(ThingDataController.isDate(1), true, "isDate(1)");
+                assert.equal(ThingDataController.isDate([]), true, "isDate([])");
+                assert.equal(ThingDataController.isDate({}), true, "isDate({})");
+                assert.equal(ThingDataController.isDate(Date.now()), true, "isDate(Date.now())")
+                assert.equal(ThingDataController.isDate(ThingDataController.moment().format()), true, "isDate(moment().format())")
+                assert.equal(ThingDataController.isDate(undefined), true, "isDate(undefined)");
             });
         });
 
