@@ -72,11 +72,6 @@ class ThingDataController {
 		//Initialize model props
 		this.model = model;
 
-        this.controller = {};
-        this.controller.dateTime = new DateTime();
-        this.controller.moment = moment;
-        this.controller.lodash = moment;
-
 		//Assign properties
 		this.additionalType = model.additionalType;
 		this.alternateName = model.alternateName;
@@ -93,9 +88,6 @@ class ThingDataController {
 
 	//IMMUTABLE
 	get type() { return this.constructor.name }
-	get lodash(){ return this.controller.lodash; }
-	get moment(){ return this.controller.moment; }
-	get dateTime(){ return this.controller.dateTime; }
 
 	get additionalType(){ return this.model.additionalType; }
 	set additionalType(value){
