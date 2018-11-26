@@ -62,7 +62,7 @@ class ThingDataController {
 
 	static isInstance(object){ return object.type === ThingDataController.type; }
     // Because this method is static, we must create an instance
-	static get type(){ return new ThingDataController().type ; }
+	static get type(){ return "thing" ; }
 	static get lodash(){ return lodash; }
 	static get moment(){ return moment; }
 	static get dateTime(){ return new DateTime(); }
@@ -87,7 +87,7 @@ class ThingDataController {
 	}
 
 	//IMMUTABLE
-	get type() { return this.constructor.name }
+	get type() { return ThingDataController.type }
 
 	get additionalType(){ return this.model.additionalType; }
 	set additionalType(value){

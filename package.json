@@ -24,7 +24,7 @@
     "mocha": "^5.2.0"
   },
   "dependencies": {
-    "dc-date-time": "0.0.3",
+    "dc-date-time": "0.0.4",
     "lodash": "^4.17.11",
     "moment": "^2.22.2"
   }

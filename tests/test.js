@@ -5,6 +5,7 @@ model.name = 'Jose Barrios';
 model.identifier = '1234';
 
 
+const TYPE = "thing";
 var assert = require('assert');
 var ThingDataController = require('../index.js');
 var thing = new ThingDataController(model);
@@ -227,7 +228,7 @@ describe('ThingDataController Class\n', function() {
 
         describe('ThingDataController.type', function() {
             it('should return the type of this class\n', function() {
-                assert.equal(ThingDataController.type, 'ThingDataController');
+                assert.equal(ThingDataController.type, TYPE);
             });
         });
     });
@@ -243,7 +244,7 @@ describe('ThingDataController Class\n', function() {
 
         describe('thing.type', function() {
             it('should return the class type', function() {
-                assert.equal(thing.type, 'ThingDataController');
+                assert.equal(thing.type, TYPE);
                 assert.equal(thing.type, ThingDataController.type);
             });
         });
