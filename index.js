@@ -136,11 +136,9 @@ class ThingDataController {
     this.name = model.name;
     this.potentialAction = model.potentialAction;
     this.sameAs = model.sameAs;
-    this.url = model.url;
-  }
-
-  get type() {
-    return ThingDataController.type
+	this.url = model.url;
+	//this.type
+	this.type = ThingDataController.type;
   }
 
   get additionalType() {

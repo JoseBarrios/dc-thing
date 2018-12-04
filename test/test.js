@@ -16,6 +16,7 @@ describe("Constructors:", function () {
       constructor(model){
         super(model);
         this.passed = model.passed;
+        this.type = "type";
       }
     }
     let testModel = {
@@ -27,6 +28,7 @@ describe("Constructors:", function () {
     assert.equal(test.identifier, "1");
     assert.equal(testModel.passed, test.passed);
     assert.equal(testModel.name, test.name);
+    assert.equal(test.type, "type");
   });
 })
 describe("Static Methods:", function () {
