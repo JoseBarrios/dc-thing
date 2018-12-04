@@ -4,7 +4,6 @@ var model = {};
 model.name = 'Jose Barrios';
 model.identifier = '1234';
 
-
 const TYPE = "thing";
 var assert = require('assert');
 var ThingDataController = require('../index.js');
@@ -288,6 +287,16 @@ describe('ThingDataController Class\n', function() {
                 let str = 'identifier';
                 thing.identifier = str;
                 assert.equal(thing.identifier, str);
+            });
+            it('should look for _id property in the passed model', function() {
+                let testModel = {_id:"123"};
+                let testController = new ThingDataController(testModel)
+                assert.equal(testController.identifier, testModel._id);
+            });
+            it('should create a unique identifier for the current context if none is provided', function() {
+                let testModel = {};
+                let testController = new ThingDataController(testModel)
+                assert.equal(testController.identifier, "1");
             });
         });
 

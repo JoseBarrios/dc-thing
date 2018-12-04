@@ -4,7 +4,7 @@
   "description": "Data controller for 'thing' that conforms to Schema.org",
   "main": "index.js",
   "scripts": {
-    "test": "./node_modules/mocha/bin/mocha tests/"
+    "test": "./node_modules/mocha/bin/mocha test/"
   },
   "repository": {
     "type": "git",
@@ -21,6 +21,7 @@
   },
   "homepage": "https://github.com/JoseBarrios/dc-thing#readme",
   "devDependencies": {
+    "eslint": "^5.9.0",
     "mocha": "^5.2.0"
   },
   "dependencies": {
