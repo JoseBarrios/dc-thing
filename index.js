@@ -138,7 +138,7 @@ class ThingDataController {
     this.sameAs = model.sameAs;
 	this.url = model.url;
 	//this.type
-	this.type = ThingDataController.type;
+	this.type = "thing";
   }
 
   get additionalType() {
